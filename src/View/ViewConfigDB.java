@@ -27,6 +27,7 @@ public class ViewConfigDB extends javax.swing.JDialog {
     public ViewConfigDB(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

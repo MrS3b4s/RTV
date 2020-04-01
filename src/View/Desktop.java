@@ -15,19 +15,21 @@ import javax.swing.JOptionPane;
  * @author Sebas
  */
 public class Desktop extends javax.swing.JFrame {
+
     public static DB db = new DB();
-    
+
     /**
      * Creates new form Desktop
      */
     public Desktop() {
-        if(!db.connect(new ConfigDB().getConfig())){
-           ViewConfigDB frm = new ViewConfigDB(this, true);
-           frm.setVisible(true);
-           db.connect(new ConfigDB().getConfig());
+        if (!db.connect(new ConfigDB().getConfig())) {
+            ViewConfigDB frm = new ViewConfigDB(this, true);
+            frm.setVisible(true);
+            db.connect(new ConfigDB().getConfig());
         }
-        
         initComponents();
+        this.setLocationRelativeTo(null);
+
     }
 
     /**
@@ -42,8 +44,10 @@ public class Desktop extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         lblUsers = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lblConfig = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
         lblUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/users.png"))); // NOI18N
@@ -63,8 +67,23 @@ public class Desktop extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Users");
 
+        lblConfig.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/config.png"))); // NOI18N
+        lblConfig.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblConfigMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblConfigMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblConfigMousePressed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(lblUsers, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lblConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -73,15 +92,23 @@ public class Desktop extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(lblUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 864, Short.MAX_VALUE)
+                        .addComponent(lblConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
-                .addContainerGap(946, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblUsers)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(lblUsers))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblConfig)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addContainerGap(547, Short.MAX_VALUE))
@@ -112,6 +139,19 @@ public class Desktop extends javax.swing.JFrame {
     private void lblUsersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsersMouseExited
         lblUsers.setIcon(new ImageIcon(getClass().getResource("/images/users.png")));
     }//GEN-LAST:event_lblUsersMouseExited
+
+    private void lblConfigMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConfigMouseEntered
+        lblConfig.setIcon(new ImageIcon(getClass().getResource("/images/config2.png")));
+    }//GEN-LAST:event_lblConfigMouseEntered
+
+    private void lblConfigMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConfigMouseExited
+        lblConfig.setIcon(new ImageIcon(getClass().getResource("/images/config.png")));
+    }//GEN-LAST:event_lblConfigMouseExited
+
+    private void lblConfigMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConfigMousePressed
+        ViewConfigDB frm = new ViewConfigDB(this, true);
+        frm.setVisible(true);
+    }//GEN-LAST:event_lblConfigMousePressed
 
     /**
      * @param args the command line arguments
@@ -151,6 +191,7 @@ public class Desktop extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblConfig;
     private javax.swing.JLabel lblUsers;
     // End of variables declaration//GEN-END:variables
 }
