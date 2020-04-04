@@ -9,6 +9,7 @@ import Classes.User;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -104,6 +105,11 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         });
 
         jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +135,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -196,11 +202,25 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_txtFilterNameKeyReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        User user = Desktop.userscontrol.searchUser((String)jTable1.getValueAt(jTable1.getSelectedRow(), 5));
-        ViewEditUser vew = new ViewEditUser(user);
-        vew.agregarObservador(this);
-        vew.setVisible(true);
+        if(jTable1.getSelectedRow() >= 0){
+            User user = Desktop.userscontrol.searchUser((String)jTable1.getValueAt(jTable1.getSelectedRow(), 5));
+            ViewEditUser vew = new ViewEditUser(user);
+            vew.agregarObservador(this);
+            vew.setVisible(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTable1.getSelectedRow() >= 0){
+            User user = Desktop.userscontrol.searchUser((String)jTable1.getValueAt(jTable1.getSelectedRow(), 5));
+            if(Desktop.userscontrol.deleteUser(user)){
+                JOptionPane.showMessageDialog(this, "Delete success");
+            } else {
+                JOptionPane.showMessageDialog(this, "Delete failed");
+            }
+            this.update(null, null);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
