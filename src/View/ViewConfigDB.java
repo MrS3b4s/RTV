@@ -195,6 +195,8 @@ public class ViewConfigDB extends javax.swing.JDialog {
         if(db.connect(config)){
             ConfigDB configDB = new ConfigDB();
             configDB.saveConfig(config);
+            Desktop.db = db;
+            Desktop.db.connect(config);
             this.dispose();
             JOptionPane.showMessageDialog(this, "Guardado exitoso");
         }else{
