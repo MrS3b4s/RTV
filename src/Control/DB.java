@@ -56,6 +56,17 @@ public class DB {
         }
         return false;
     }
+    
+    public boolean delete(String sentence){
+        try {
+            this.statement.executeUpdate(sentence);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+    }
 
     public ResultSet search(String sentence) {
         try {

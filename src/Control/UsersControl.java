@@ -60,7 +60,13 @@ public class UsersControl {
             }
         } 
         return null;
-        
+    }
+    
+    public boolean deleteUser(User user){
+        if(usersList().size() >= 2){
+            return Desktop.db.delete("delete from users where User='"+user.getUserName()+"'");
+        }
+        return false;
     }
     
     public ArrayList usersList(){
