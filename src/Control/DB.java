@@ -35,7 +35,7 @@ public class DB {
         return false;
     }
 
-    public boolean add(String sentence) {
+    public boolean create(String sentence) {
         try {
             this.statement.execute(sentence);
             return true;
@@ -46,20 +46,25 @@ public class DB {
             return false;
         }
     }
-
-    public ArrayList search(String sentence) {
-        ArrayList array = new ArrayList<>();
-        int i = 0;
+    
+    public boolean update(String sentence){
         try {
-            this.resultSet = this.statement.executeQuery(sentence);
-            while (this.resultSet.next()) {
-                array.add(this.resultSet.getObject(i));
-                i++;
-            }
+            this.statement.executeUpdate(sentence);
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return array;
+        return false;
+    }
+
+    public ResultSet search(String sentence) {
+        try {
+            this.resultSet = this.statement.executeQuery(sentence);
+            return this.resultSet;
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public ResultSet list(String sentence) {
