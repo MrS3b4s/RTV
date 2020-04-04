@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class UsersControl {
     
     public boolean addUser(User user){
-        return Desktop.db.add("insert into users values(null,'"+
+        return Desktop.db.create("insert into users values(null,'"+
                 user.getDni()+"','"+ 
                 user.getFullName()+"','"+
                 user.getBirthday()+"','"+
@@ -28,6 +28,39 @@ public class UsersControl {
                 user.getUserName()+"','"+
                 user.getPassword()+"')"
         );
+    }
+    
+    public boolean updateUser(User user, String userName){
+        return Desktop.db.update("update users set DNI='"+user.getDni()
+        +"',FullName='"+user.getFullName()
+        +"',Birthday='"+user.getBirthday()
+        +"',PhoneNumber='"+user.getPhoneNumber()
+        +"',Email='"+user.getEmail()
+        +"',User='"+user.getUserName()
+        +"',Password='"+user.getPassword()
+        +"'where User='"+userName+"'"
+        );
+    }
+    
+    public User searchUser(String userName){
+        ResultSet resultSet = Desktop.db.search("SELECT * FROM `users` where User='"+userName+"'");
+        if(resultSet != null){
+            try {
+                resultSet.next();
+                return new User(resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getDate(4), resultSet.getInt(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8)
+                );
+            } catch (SQLException ex) {
+                System.out.println(ex);
+//                Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return null;
+        
     }
     
     public ArrayList usersList(){
@@ -41,7 +74,8 @@ public class UsersControl {
                     resultSet.getDate(4), resultSet.getInt(5),
                     resultSet.getString(6),
                     resultSet.getString(7),
-                    resultSet.getString(8)));
+                    resultSet.getString(8))
+                    );
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);

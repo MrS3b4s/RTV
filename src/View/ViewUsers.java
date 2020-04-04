@@ -115,6 +115,11 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         jLabel2.setText("Filtrar");
 
         jButton3.setText("Edit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,6 +195,13 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         jTable1.setModel(tb);
     }//GEN-LAST:event_txtFilterNameKeyReleased
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        User user = Desktop.userscontrol.searchUser((String)jTable1.getValueAt(jTable1.getSelectedRow(), 5));
+        ViewEditUser vew = new ViewEditUser(user);
+        vew.agregarObservador(this);
+        vew.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,10 +250,6 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        ArrayList<User> users = Desktop.userscontrol.usersList();
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println(users.get(i));
-        }
         this.updateTableModel();
     }
 }
