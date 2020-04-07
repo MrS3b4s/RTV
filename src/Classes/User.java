@@ -30,6 +30,18 @@ public class User {
         this.email = email;
         this.userName = userName;
         this.password = password;
+        this.userType = false;
+    }
+    
+    public User(String dni, String fullName, Date birthday, int phoneNumber, String email, String userName, String password, boolean bool) {
+        this.dni = dni;
+        this.fullName = fullName;
+        this.birthday = birthday;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+        this.userType = bool;
     }
    
     public String getDni() {
@@ -88,7 +100,7 @@ public class User {
         this.password = password;
     }
 
-    public boolean isUserType() {
+    public boolean getUserType() {
         return userType;
     }
 
@@ -96,6 +108,8 @@ public class User {
         this.userType = userType;
     }
 
+    
+    
     @Override
     public String toString() {
         return "User{" + "dni=" + dni + ", fullName=" + fullName + ", birthday=" + birthday + ", phoneNumber=" + phoneNumber + ", email=" + email + ", userName=" + userName + ", password=" + password + ", userType=" + userType + '}';

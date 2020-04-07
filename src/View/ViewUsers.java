@@ -35,6 +35,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         tb.addColumn("Phone Number");
         tb.addColumn("Email");
         tb.addColumn("User name");
+        tb.addColumn("Technician");
         jTable1.setModel(tb);
         this.update(null, null);
     }
@@ -47,18 +48,21 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         tb.addColumn("Phone Number");
         tb.addColumn("Email");
         tb.addColumn("User name");
+        tb.addColumn("Technician");
         ArrayList<User> users = Desktop.userscontrol.usersList();
         for (int i = 0; i < users.size(); i++) {
-            Object[] row = new Object[6];
+            Object[] row = new Object[7];
             row[0] = users.get(i).getDni();
             row[1] = users.get(i).getFullName();
             row[2] = users.get(i).getBirthday();
             row[3] = users.get(i).getPhoneNumber();
             row[4] = users.get(i).getEmail();
             row[5] = users.get(i).getUserName();
+            row[6] = users.get(i).getUserType();
             tb.addRow(row);
         }
         jTable1.setModel(tb);
+        
     }
 
     /**
@@ -79,7 +83,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,7 +139,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1222, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
