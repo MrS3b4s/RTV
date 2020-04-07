@@ -56,6 +56,9 @@ public class ViewEditUser extends javax.swing.JFrame {
         txtPhone.setText(String.valueOf(this.user.getPhoneNumber()));
         txtEmail.setText(this.user.getEmail());
         txtUser.setText(this.user.getUserName());
+        if (user.getUserType()) {
+            jCheckBox1.setSelected(true);
+        }
         this.setLocationRelativeTo(null);
     }
 
