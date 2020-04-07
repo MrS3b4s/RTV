@@ -116,6 +116,12 @@ public class ViewEditUser extends javax.swing.JFrame {
 
         jLabel9.setText("Password:");
 
+        txtDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDNIActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("DNI:");
 
         jButton3.setText("Change Password");
@@ -258,6 +264,10 @@ public class ViewEditUser extends javax.swing.JFrame {
         this.notificarObservadores();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDNIActionPerformed
 
     /**
      * @param args the command line arguments
