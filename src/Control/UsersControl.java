@@ -26,7 +26,8 @@ public class UsersControl {
                 user.getPhoneNumber()+"','"+
                 user.getEmail()+"','"+
                 user.getUserName()+"','"+
-                user.getPassword()+"')"
+                user.getPassword()+"',"+
+                user.getUserType()+")"
         );
     }
     
@@ -38,7 +39,8 @@ public class UsersControl {
         +"',Email='"+user.getEmail()
         +"',User='"+user.getUserName()
         +"',Password='"+user.getPassword()
-        +"'where User='"+userName+"'"
+        +"',Technician="+user.getUserType()
+        +" where User='"+userName+"'"
         );
     }
     
@@ -52,7 +54,8 @@ public class UsersControl {
                         resultSet.getDate(4), resultSet.getInt(5),
                         resultSet.getString(6),
                         resultSet.getString(7),
-                        resultSet.getString(8)
+                        resultSet.getString(8),
+                        resultSet.getBoolean(9)
                 );
             } catch (SQLException ex) {
                 System.out.println(ex);
@@ -80,8 +83,9 @@ public class UsersControl {
                     resultSet.getDate(4), resultSet.getInt(5),
                     resultSet.getString(6),
                     resultSet.getString(7),
-                    resultSet.getString(8))
-                    );
+                    resultSet.getString(8),
+                    resultSet.getBoolean(9)
+                    ));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,7 +105,9 @@ public class UsersControl {
                     resultSet.getDate(4), resultSet.getInt(5),
                     resultSet.getString(6),
                     resultSet.getString(7),
-                    resultSet.getString(8)));
+                    resultSet.getString(8),
+                    resultSet.getBoolean(9)
+                    ));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
