@@ -5,26 +5,22 @@
  */
 package View;
 
-import java.awt.Color;
-import javax.swing.JPanel;
+import Classes.User;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Sebas
  */
-public class ViewLogin extends javax.swing.JFrame {
+public class ViewLogin extends javax.swing.JDialog {
 
     /**
-     * Creates new form ViewLogin
+     * Creates new form ViewLoginJ
      */
-    
-    private JPanel panelFondo;
-    
-    public ViewLogin() {
+    public ViewLogin(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        panelFondo = new JPanel();
-        panelFondo.setBackground(new Color(255,255,255));
-        add(panelFondo);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -43,7 +39,7 @@ public class ViewLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login.png"))); // NOI18N
 
@@ -62,7 +58,7 @@ public class ViewLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
@@ -74,19 +70,18 @@ public class ViewLogin extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1))
-                        .addGap(59, 59, 59))))
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(59, 59, 59)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel2)
                 .addGap(43, 43, 43)
+                .addComponent(jLabel2)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel1))
+                    .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -101,8 +96,19 @@ public class ViewLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.getText().isEmpty() && jPasswordField1.getText().isEmpty()) {
-            
+        if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
+            User user = Desktop.userscontrol.searchUser(jTextField1.getText());
+            if(user != null){
+                if(user.getPassword().equals(jPasswordField1.getText())){
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid password");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Non-existent user");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill the fields");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -132,11 +138,19 @@ public class ViewLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewLogin().setVisible(true);
+                ViewLogin dialog = new ViewLogin(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

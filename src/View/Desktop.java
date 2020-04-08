@@ -28,6 +28,10 @@ public class Desktop extends javax.swing.JFrame {
             frm.setVisible(true);
             db.connect(new ConfigDB().getConfig());
         }
+        
+        ViewLogin vl = new ViewLogin(this, true);
+        vl.setVisible(true);
+        
         initComponents();
         this.setLocationRelativeTo(null);
 
