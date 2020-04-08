@@ -45,7 +45,29 @@ public class UsersControl {
     }
     
     public User searchUser(String userName){
+        System.out.println(userName);
         ResultSet resultSet = Desktop.db.search("SELECT * FROM `users` where User='"+userName+"'");
+        if(resultSet != null){
+            try {
+                resultSet.next();
+                return new User(resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getDate(4), resultSet.getInt(5),
+                        resultSet.getString(6),
+                        resultSet.getString(7),
+                        resultSet.getString(8),
+                        resultSet.getBoolean(9)
+                );
+            } catch (SQLException ex) {
+                System.out.println(ex);
+//                Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return null;
+    }
+        public User searchDNI(String dni){
+        
+        ResultSet resultSet = Desktop.db.search("SELECT * FROM `users` where DNI='"+dni+"'");
         if(resultSet != null){
             try {
                 resultSet.next();
@@ -97,6 +119,49 @@ public class UsersControl {
     public ArrayList filterUsersListByName(String filter){
         ArrayList<User> users = new ArrayList<>();
         ResultSet resultSet = Desktop.db.list("select * from users where FullName like '%"+filter+"%'");
+        if(resultSet != null){
+            try {
+                while(resultSet.next()){
+                    users.add(new User(resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getDate(4), resultSet.getInt(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getBoolean(9)
+                    ));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return users;
+    }
+        public ArrayList filterUsersListByDNI(String filter){
+        ArrayList<User> users = new ArrayList<>();
+        ResultSet resultSet = Desktop.db.list("select * from users where DNI like '%"+filter+"%' AND Technician = 1");
+        if(resultSet != null){
+            try {
+                while(resultSet.next()){
+                    users.add(new User(resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getDate(4), resultSet.getInt(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getBoolean(9)
+                    ));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return users;
+    }
+    
+        public ArrayList filterUsersListByTech(){
+        ArrayList<User> users = new ArrayList<>();
+        ResultSet resultSet = Desktop.db.list("select * from users where Technician = 1 ");
         if(resultSet != null){
             try {
                 while(resultSet.next()){

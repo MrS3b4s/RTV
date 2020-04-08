@@ -5,6 +5,10 @@
  */
 package View;
 
+import Classes.User;
+import java.util.ArrayList;
+import java.util.Observer;
+
 /**
  *
  * @author Andrey
@@ -14,10 +18,45 @@ public class Deductions extends javax.swing.JFrame {
     /**
      * Creates new form Deductions
      */
+    Control.Salarycontrol Sala = new Control.Salarycontrol();
+    private ArrayList<Observer> observadores = new ArrayList<>();
+
+    public void agregarObservador(Observer o) {
+        this.observadores.add(o);
+    }
+
+    public void quitarObservador(Observer o) {
+        this.observadores.remove(o);
+    }
+
+    public void notificarObservadores() {
+        for (Observer obj : observadores) {
+            obj.update(null, null);
+        }
+    }
+
+    public User user;
+    private static String userName;
+
     public Deductions() {
         initComponents();
     }
     double rent = 0;
+
+    public Deductions(User user) {
+        this.user = user;
+//        this.userName = user.getUserName();
+        initComponents();
+        lblDNI.setText(this.user.getDni());
+        System.out.println(this.user.getFullName());
+        lblFullName.setText(this.user.getFullName());
+        txtBirth.setText(String.valueOf(this.user.getBirthday()));
+        txttelephone.setText(String.valueOf(this.user.getPhoneNumber()));
+        txtEmail.setText(this.user.getEmail());
+        txtUser.setText(this.user.getUserName());
+        fillSpace();
+        this.setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +67,6 @@ public class Deductions extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtdni = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -44,14 +82,20 @@ public class Deductions extends javax.swing.JFrame {
         fmtGross = new javax.swing.JFormattedTextField();
         fmtIllnes = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtUser = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txttelephone = new javax.swing.JTextField();
+        txtBirth = new javax.swing.JTextField();
+        lblDNI = new javax.swing.JLabel();
+        lblFullName = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtdni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtdniActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Bodoni MT Black", 1, 12)); // NOI18N
         jLabel1.setText("Illness and maternity 5.5%");
@@ -79,6 +123,11 @@ public class Deductions extends javax.swing.JFrame {
 
         fmtWorker.setEditable(false);
         fmtWorker.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¢#,##0.00;(¤#,##0.00)"))));
+        fmtWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fmtWorkerActionPerformed(evt);
+            }
+        });
 
         fmtAssociation.setEditable(false);
         fmtAssociation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¢#,##0.00;(¤#,##0.00)"))));
@@ -103,48 +152,150 @@ public class Deductions extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Bodoni MT Black", 1, 14)); // NOI18N
         jLabel8.setText("DNI");
 
+        jLabel9.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel9.setText("Information");
+
+        jLabel10.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jLabel10.setText("Name");
+
+        txtUser.setEditable(false);
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+
+        txtEmail.setEditable(false);
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+
+        txttelephone.setEditable(false);
+        txttelephone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttelephoneActionPerformed(evt);
+            }
+        });
+
+        txtBirth.setEditable(false);
+        txtBirth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBirthActionPerformed(evt);
+            }
+        });
+
+        lblDNI.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblDNI.setText("-----------------");
+
+        lblFullName.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
+        lblFullName.setText("-----------------");
+
+        jLabel11.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jLabel11.setText("E-mail");
+
+        jLabel12.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jLabel12.setText("User");
+
+        jLabel13.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jLabel13.setText("Phone");
+
+        jLabel14.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jLabel14.setText("Birth Date");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(120, 120, 120))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
+                    .addComponent(lblDNI)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(lblFullName))
+                .addGap(130, 130, 130))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fmtNet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fmtTax, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(fmtAssociation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                        .addComponent(fmtWorker, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(fmtDisability, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(fmtIllnes, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(fmtGross, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(29, 29, 29))
+                                .addComponent(jLabel7)
+                                .addGap(120, 120, 120)
+                                .addComponent(fmtNet, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(fmtTax, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                        .addComponent(fmtAssociation)
+                                        .addComponent(fmtWorker)
+                                        .addComponent(fmtDisability)
+                                        .addComponent(fmtIllnes)
+                                        .addComponent(fmtGross, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txttelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel13))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel11)
+                                        .addComponent(txtEmail)))))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(txtBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(27, 27, 27)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDNI)
+                    .addComponent(lblFullName))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txttelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addGap(1, 1, 1)
+                .addComponent(txtBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -173,7 +324,7 @@ public class Deductions extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fmtTax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(fmtNet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,38 +334,29 @@ public class Deductions extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdniActionPerformed
-        Control.Salarycontrol b = new Control.Salarycontrol();
-
-        String m = b.finder(Integer.parseInt(txtdni.getText()));
-
-        int Sal = Integer.parseInt(m);
-        double mater = 5.5 * Sal / 100;
-        double dead = 3.84 * Sal / 100;
-        double worker = 1.0 * Sal / 100;
-        double aso = 3.3 * Sal / 100;
-
-        if (Sal < 817000) {
-            rent = 0;
-
-        } else if (Sal > 817001 && Sal < 1226000) {
-            rent = 10.0 * Sal / 100;
-        } else {
-            rent = 15.0 * Sal / 100;
-        }
-
-        fmtGross.setValue(Sal);
-        fmtIllnes.setValue(mater);
-        fmtDisability.setValue(dead);
-        fmtWorker.setValue(worker);
-        fmtAssociation.setValue(aso);
-        fmtTax.setValue(rent);
-        fmtNet.setValue(Sal-mater-dead-worker-aso-rent);
-    }//GEN-LAST:event_txtdniActionPerformed
-
     private void fmtIllnesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fmtIllnesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fmtIllnesActionPerformed
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txttelephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelephoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelephoneActionPerformed
+
+    private void txtBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBirthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBirthActionPerformed
+
+    private void fmtWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fmtWorkerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fmtWorkerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,6 +393,32 @@ public class Deductions extends javax.swing.JFrame {
         });
     }
 
+    public void fillSpace() {
+
+        int Sal = Integer.parseInt(Sala.finder(Integer.parseInt(this.user.getDni())));
+        double mater = 5.5 * Sal / 100;
+        double dead = 3.84 * Sal / 100;
+        double worker = 1.0 * Sal / 100;
+        double aso = 3.3 * Sal / 100;
+
+        if (Sal < 817000) {
+            rent = 0;
+
+        } else if (Sal > 817001 && Sal < 1226000) {
+            rent = 10.0 * Sal / 100;
+        } else {
+            rent = 15.0 * Sal / 100;
+        }
+
+        fmtGross.setValue(Sal);
+        fmtIllnes.setValue(mater);
+        fmtDisability.setValue(dead);
+        fmtWorker.setValue(worker);
+        fmtAssociation.setValue(aso);
+        fmtTax.setValue(rent);
+        fmtNet.setValue(Sal - mater - dead - worker - aso - rent);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField fmtAssociation;
     private javax.swing.JFormattedTextField fmtDisability;
@@ -260,6 +428,11 @@ public class Deductions extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField fmtTax;
     private javax.swing.JFormattedTextField fmtWorker;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -267,6 +440,12 @@ public class Deductions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtdni;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblDNI;
+    private javax.swing.JLabel lblFullName;
+    private javax.swing.JTextField txtBirth;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtUser;
+    private javax.swing.JTextField txttelephone;
     // End of variables declaration//GEN-END:variables
 }
