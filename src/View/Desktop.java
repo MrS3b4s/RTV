@@ -19,6 +19,7 @@ public class Desktop extends javax.swing.JFrame {
 
     public static DB db = new DB();
     public static UsersControl userscontrol = new UsersControl();
+
     /**
      * Creates new form Desktop
      */
@@ -51,6 +52,8 @@ public class Desktop extends javax.swing.JFrame {
         lblUsers = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblConfig = new javax.swing.JLabel();
+        lblSalary = new javax.swing.JLabel();
+        lbltextSalary = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -90,9 +93,29 @@ public class Desktop extends javax.swing.JFrame {
             }
         });
 
+        lblSalary.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSalary.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/salary.png"))); // NOI18N
+        lblSalary.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSalaryMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSalaryMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSalaryMousePressed(evt);
+            }
+        });
+
+        lbltextSalary.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        lbltextSalary.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltextSalary.setText("Salary ");
+
         jDesktopPane1.setLayer(lblUsers, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(lblConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lblSalary, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lbltextSalary, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -101,12 +124,16 @@ public class Desktop extends javax.swing.JFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(50, 50, 50)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(lblUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1173, Short.MAX_VALUE)
+                        .addComponent(lblSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1051, Short.MAX_VALUE)
                         .addComponent(lblConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lbltextSalary)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -114,12 +141,16 @@ public class Desktop extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblConfig)
-                    .addComponent(lblUsers))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(753, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblConfig)
+                        .addComponent(lblUsers, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblSalary))
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbltextSalary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(741, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,6 +195,19 @@ public class Desktop extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_lblConfigMousePressed
 
+    private void lblSalaryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalaryMouseEntered
+        lblSalary.setIcon(new ImageIcon(getClass().getResource("/images/salary2.png")));
+    }//GEN-LAST:event_lblSalaryMouseEntered
+
+    private void lblSalaryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalaryMouseExited
+        lblSalary.setIcon(new ImageIcon(getClass().getResource("/images/salary.png")));
+    }//GEN-LAST:event_lblSalaryMouseExited
+
+    private void lblSalaryMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalaryMousePressed
+        ViewSalary vw = new ViewSalary();
+        vw.setVisible(true);
+    }//GEN-LAST:event_lblSalaryMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -204,6 +248,8 @@ public class Desktop extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel lblConfig;
+    private javax.swing.JLabel lblSalary;
     private javax.swing.JLabel lblUsers;
+    private javax.swing.JLabel lbltextSalary;
     // End of variables declaration//GEN-END:variables
 }

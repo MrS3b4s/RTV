@@ -103,7 +103,7 @@ public class Salarycontrol {
             BufferedWriter Fwrite = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(SalaryFile, true), "utf-8"));
             /*Escribe en el fichero la cadena que recibe la función.  
            *el string "\r\n" significa salto de linea  y el \t significa tabulacion  */
-            Fwrite.write(getId() + ",\t" + getDescription() + ",\t" + formato.format(f) + "\r\n");
+            Fwrite.write(getId() + "\t" + getDescription() + "\t" + formato.format(f) + "\r\n");
             System.out.println("Data has been inserted");           //Cierra el flujo de escritura  
             Fwrite.close();
 
@@ -186,15 +186,7 @@ public class Salarycontrol {
         for (Salarycontrol n : List) {
 
             if (n.getId() == Id) {
-
-                System.out.println("=========================== SALARY =========================================================================================================================================================================================");
-                System.out.println("The salary is :" + n.getDescription());
-                System.out.println("============================FIN==============================================================================================================================================================================================");
-                 return n.getDescription();
-
-                
-            } else {
-                System.out.println("This Id doesn't exist ");
+                return n.getDescription();
             }
         }
         //save();
