@@ -6,10 +6,12 @@
 package View;
 
 import Classes.User;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +24,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
      * Creates new form ViewUsers
      */
     
-   
+    private JPanel panelFondo;
     
     
     public ViewUsers() {
@@ -38,6 +40,14 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         tb.addColumn("Technician");
         jTable1.setModel(tb);
         this.update(null, null);
+        
+        
+                
+        
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
     
     public void updateTableModel(){

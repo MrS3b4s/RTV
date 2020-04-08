@@ -6,7 +6,9 @@
 package View;
 
 import Classes.User;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,10 +19,17 @@ public class ViewLogin extends javax.swing.JDialog {
     /**
      * Creates new form ViewLoginJ
      */
+    
+    private JPanel panelFondo;
+    
     public ViewLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     /**
