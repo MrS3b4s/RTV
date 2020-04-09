@@ -102,6 +102,11 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Users");
 
+        txtFilterName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFilterNameActionPerformed(evt);
+            }
+        });
         txtFilterName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFilterNameKeyReleased(evt);
@@ -225,6 +230,10 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
             this.update(null, null);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtFilterNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFilterNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFilterNameActionPerformed
 
     /**
      * @param args the command line arguments

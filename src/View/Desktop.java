@@ -8,6 +8,7 @@ package View;
 import Control.ConfigDB;
 import Control.DB;
 import Control.UsersControl;
+import Control.VehiculesControl;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,7 @@ public class Desktop extends javax.swing.JFrame {
 
     public static DB db = new DB();
     public static UsersControl userscontrol = new UsersControl();
+    public static VehiculesControl vehiculesControl = new VehiculesControl();
     /**
      * Creates new form Desktop
      */
