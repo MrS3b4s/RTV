@@ -25,6 +25,7 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
     public ViewDetailsVehicule(Vehicules vehicule) {
         this.vehicule = vehicule;
         initComponents();
+        this.setLocationRelativeTo(null);
         jTFDNIVehicule.setText(this.vehicule.getVehiculeDNI());
         jTFBrand.setText(this.vehicule.getBrand());
         jTFModel.setText(this.vehicule.getModel());

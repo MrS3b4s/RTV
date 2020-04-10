@@ -19,7 +19,8 @@ public class ViewNewVehicule extends javax.swing.JFrame {
      * Creates new form ViewNewVehicule
      */
     public ViewNewVehicule() {
-        initComponents();     
+        initComponents(); 
+        this.setLocationRelativeTo(null);
         
     }
 
