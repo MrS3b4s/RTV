@@ -6,34 +6,23 @@
 package View;
 
 import Classes.Vehicules;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Juergen Segura
  */
-public class ViewDetailsVehicule extends javax.swing.JFrame {
-    public Vehicules vehicule;
+public class ViewNewVehicule extends javax.swing.JFrame {
+
     /**
-     * Creates new form ViewCars
+     * Creates new form ViewNewVehicule
      */
-    public ViewDetailsVehicule() {
-        initComponents();
-        disableJTF();
+    public ViewNewVehicule() {
+        initComponents();     
+        
     }
 
-    public ViewDetailsVehicule(Vehicules vehicule) {
-        this.vehicule = vehicule;
-        initComponents();
-        jTFDNIVehicule.setText(this.vehicule.getVehiculeDNI());
-        jTFBrand.setText(this.vehicule.getBrand());
-        jTFModel.setText(this.vehicule.getModel());
-        jTFYear.setText(String.valueOf(this.vehicule.getYear()));
-        jTFNameOwner.setText(this.vehicule.getOwnerName());
-        jTFDNIOwner.setText(String.valueOf(this.vehicule.getOwnerDNI()));
-        jTFAgeVehicule.setText(String.valueOf(this.vehicule.getAgeVehicule()));
-        disableJTF();
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,35 +32,37 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTFDNIVehicule = new javax.swing.JTextField();
+        jTFNameOwner = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jTFBrand = new javax.swing.JTextField();
+        jTFAgeVehicule = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton2 = new javax.swing.JButton();
         jTFYear = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTFModel = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jTFDNIOwner = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTFNameOwner = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTFAgeVehicule = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        btnOk = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
+        jTFDNIVehicule = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Details of Vehicule");
-
-        jLabel2.setText("DNI vehicule");
+        jTFNameOwner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNameOwnerActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Brand:");
+
+        jLabel9.setText("Age of vehicule:");
 
         jTFBrand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,9 +72,23 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
 
         jLabel4.setText("Year:");
 
+        jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jTFYear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFYearActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Done");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -93,29 +98,13 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
 
         jLabel7.setText("DNI owner:");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Register Vehicules");
+
+        jLabel2.setText("DNI vehicule");
+
         jLabel8.setText("Name owner:");
-
-        jTFNameOwner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFNameOwnerActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("Age of vehicule:");
-
-        btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,10 +137,10 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(73, 73, 73)
-                .addComponent(btnDelete)
+                .addComponent(jButton2)
                 .addGap(56, 56, 56)
-                .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,15 +179,19 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTFAgeVehicule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOk)
-                    .addComponent(btnDelete))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTFNameOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNameOwnerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNameOwnerActionPerformed
 
     private void jTFBrandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFBrandActionPerformed
         // TODO add your handling code here:
@@ -208,33 +201,29 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFYearActionPerformed
 
-    private void jTFNameOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNameOwnerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNameOwnerActionPerformed
-
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnOkActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if(Desktop.vehiculesControl.deleteVehicule(vehicule)){
-            JOptionPane.showMessageDialog(this, "Vehicule successfully removed");
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String[] d =new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate()).split("-");
+        java.sql.Date date = new java.sql.Date(Integer.parseInt(d[0])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[2]));
+        Vehicules vehicule = new Vehicules(jTFDNIVehicule.getText(),
+                jTFBrand.getText(),
+                jTFModel.getText(),
+                Integer.parseInt(jTFYear.getText()),
+                date,
+                Integer.parseInt(jTFDNIOwner.getText()),
+                jTFNameOwner.getText());
+        if(Desktop.vehiculesControl.addVehicule(vehicule)){
+            JOptionPane.showMessageDialog(this, "Vehicule successfully added.");
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(this, "The vehicule could not be remove. Try again");
+            JOptionPane.showMessageDialog(this, "Vehicule added without success.");
         }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-    
-    private void disableJTF(){
-        jTFYear.setEnabled(false);
-        jTFNameOwner.setEnabled(false);
-        jTFModel.setEnabled(false);
-        jTFDNIVehicule.setEnabled(false);
-        jTFDNIOwner.setEnabled(false);
-        jTFBrand.setEnabled(false);
-        jTFAgeVehicule.setEnabled(false);
-        jDateChooser1.setEnabled(false);
-    }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -252,34 +241,27 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewDetailsVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewNewVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewDetailsVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewNewVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewDetailsVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewNewVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewDetailsVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewNewVehicule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewDetailsVehicule().setVisible(true);
+                new ViewNewVehicule().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
