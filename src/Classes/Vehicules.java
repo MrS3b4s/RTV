@@ -26,7 +26,7 @@ public class Vehicules {
 
     private void setAgeVehicule(int ageVehicule) {
         Date d = new Date();
-        this.ageVehicule = d.getYear()-this.getYear();
+        this.ageVehicule = (d.getYear()+1900)-this.getYear();
     }
 
     public String getVehiculeDNI() {
@@ -95,6 +95,7 @@ public class Vehicules {
         this.inscriptionDate = inscriptionDate;
         this.ownerDNI = ownerDNI;
         this.ownerName = ownerName;
+        this.setAgeVehicule(this.getYear());
     }
     
     

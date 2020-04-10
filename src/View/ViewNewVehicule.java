@@ -35,9 +35,7 @@ public class ViewNewVehicule extends javax.swing.JFrame {
 
         jTFNameOwner = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jTFBrand = new javax.swing.JTextField();
-        jTFAgeVehicule = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
@@ -62,8 +60,6 @@ public class ViewNewVehicule extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Brand:");
-
-        jLabel9.setText("Age of vehicule:");
 
         jTFBrand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,11 +119,9 @@ public class ViewNewVehicule extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel7))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTFAgeVehicule)
                             .addComponent(jTFYear, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTFModel)
                             .addComponent(jTFDNIVehicule)
@@ -176,11 +170,7 @@ public class ViewNewVehicule extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTFNameOwner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTFAgeVehicule, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -272,8 +262,6 @@ public class ViewNewVehicule extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTFAgeVehicule;
     private javax.swing.JTextField jTFBrand;
     private javax.swing.JTextField jTFDNIOwner;
     private javax.swing.JTextField jTFDNIVehicule;

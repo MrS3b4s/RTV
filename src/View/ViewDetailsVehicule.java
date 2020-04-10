@@ -30,6 +30,7 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
         jTFBrand.setText(this.vehicule.getBrand());
         jTFModel.setText(this.vehicule.getModel());
         jTFYear.setText(String.valueOf(this.vehicule.getYear()));
+        jDateChooser1.setDate(this.vehicule.getInscriptionDate());
         jTFNameOwner.setText(this.vehicule.getOwnerName());
         jTFDNIOwner.setText(String.valueOf(this.vehicule.getOwnerDNI()));
         jTFAgeVehicule.setText(String.valueOf(this.vehicule.getAgeVehicule()));
@@ -227,14 +228,13 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
     
     private void disableJTF(){
-        jTFYear.setEnabled(false);
-        jTFNameOwner.setEnabled(false);
-        jTFModel.setEnabled(false);
-        jTFDNIVehicule.setEnabled(false);
-        jTFDNIOwner.setEnabled(false);
-        jTFBrand.setEnabled(false);
-        jTFAgeVehicule.setEnabled(false);
-        jDateChooser1.setEnabled(false);
+        jTFYear.setEditable(false);
+        jTFNameOwner.setEditable(false);
+        jTFModel.setEditable(false);
+        jTFDNIVehicule.setEditable(false);
+        jTFDNIOwner.setEditable(false);
+        jTFBrand.setEditable(false);
+        jTFAgeVehicule.setEditable(false);
     }
     /**
      * @param args the command line arguments

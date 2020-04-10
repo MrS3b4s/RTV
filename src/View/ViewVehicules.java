@@ -150,6 +150,7 @@ public class ViewVehicules extends javax.swing.JFrame {
         if(jTable1.getSelectedRow() >=0){
             Vehicules vehicule = Desktop.vehiculesControl.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
             ViewDetailsVehicule view = new ViewDetailsVehicule(vehicule);
+            view.setVisible(rootPaneCheckingEnabled);
         }
     }//GEN-LAST:event_btnViewDetailsActionPerformed
 
