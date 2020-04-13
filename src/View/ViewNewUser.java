@@ -6,10 +6,12 @@
 package View;
 
 import Classes.User;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,6 +22,8 @@ public class ViewNewUser extends javax.swing.JDialog {
     /**
      * Creates new form ViewNewUser
      */
+    
+    private JPanel panelFondo;
     
     private ArrayList<Observer> observadores = new ArrayList<>();
     
@@ -41,6 +45,11 @@ public class ViewNewUser extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     /**

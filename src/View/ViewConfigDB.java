@@ -8,8 +8,10 @@ package View;
 
 import Control.ConfigDB;
 import Control.DB;
+import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 
@@ -24,10 +26,19 @@ public class ViewConfigDB extends javax.swing.JDialog {
     /**
      * Creates new form Configuracion
      */
+    
+    private JPanel panelFondo;
+    
     public ViewConfigDB(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     /**

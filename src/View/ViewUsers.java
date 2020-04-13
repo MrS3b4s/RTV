@@ -132,7 +132,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
             }
         });
 
-        jLabel2.setText("Filtrar");
+        jLabel2.setText("Fliter:");
 
         jButton3.setText("Edit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {

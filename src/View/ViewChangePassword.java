@@ -6,7 +6,9 @@
 package View;
 
 import Classes.User;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,9 +20,17 @@ public class ViewChangePassword extends javax.swing.JDialog {
     /**
      * Creates new form ViewChangePassword
      */
+    
+    private JPanel panelFondo;
+    
     public ViewChangePassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     

@@ -127,7 +127,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Filtrar"/>
+        <Property name="text" type="java.lang.String" value="Fliter:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
