@@ -12,6 +12,9 @@ import java.util.Date;
  * @author Andrey
  */
 public class Vehicules {
+
+    public Vehicules() {
+    }
     
     private String vehiculeDNI;
     private String brand;
@@ -19,6 +22,15 @@ public class Vehicules {
     private int year;
     private Date inscriptionDate;
 
+
+    public int AgeVehicule() {
+         Date d = new Date();
+        System.out.println(this.getYear());
+       
+        return (d.getYear()+1900)-this.getYear();
+    }
+
+   
     public String getVehiculeDNI() {
         return vehiculeDNI;
     }
