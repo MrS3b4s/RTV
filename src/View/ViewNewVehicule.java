@@ -52,7 +52,7 @@ public class ViewNewVehicule extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTFDNIVehicule = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTFNameOwner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

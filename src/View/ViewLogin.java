@@ -109,6 +109,7 @@ public class ViewLogin extends javax.swing.JDialog {
             User user = Desktop.userscontrol.searchUser(jTextField1.getText());
             if(user != null){
                 if(user.getPassword().equals(jPasswordField1.getText())){
+                    Desktop.currentUser = user;
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Invalid password");

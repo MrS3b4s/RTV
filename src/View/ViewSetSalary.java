@@ -78,7 +78,7 @@ public class ViewSetSalary extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnSet = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         jLabel1.setText("Setting Salary");

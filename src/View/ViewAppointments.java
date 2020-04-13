@@ -58,7 +58,7 @@ public class ViewAppointments extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         spinyear = new com.toedter.calendar.JYearChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         jLabel1.setText("Appointments");

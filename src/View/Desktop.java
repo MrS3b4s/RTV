@@ -5,6 +5,7 @@
  */
 package View;
 
+import Classes.User;
 import Control.ConfigDB;
 import Control.DB;
 import Control.UsersControl;
@@ -19,6 +20,7 @@ public class Desktop extends javax.swing.JFrame {
 
     public static DB db = new DB();
     public static UsersControl userscontrol = new UsersControl();
+    public static User currentUser;
 
     /**
      * Creates new form Desktop
@@ -29,13 +31,17 @@ public class Desktop extends javax.swing.JFrame {
             frm.setVisible(true);
             db.connect(new ConfigDB().getConfig());
         }
-
+        
+        
         ViewLogin vl = new ViewLogin(this, true);
         vl.setVisible(true);
-
-        initComponents();
-        this.setLocationRelativeTo(null);
-
+        
+        if(this.currentUser != null){
+            initComponents();
+            this.setLocationRelativeTo(null);
+        } else {
+            System.exit(0);
+        }
     }
 
     /**
@@ -260,16 +266,16 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_lblConfigMousePressed
 
     private void lblSalaryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalaryMouseEntered
-        lblVehicules.setIcon(new ImageIcon(getClass().getResource("/images/salary2.png")));
+        lblSalary.setIcon(new ImageIcon(getClass().getResource("/images/salary2.png")));
     }//GEN-LAST:event_lblSalaryMouseEntered
 
     private void lblSalaryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalaryMouseExited
-        lblVehicules.setIcon(new ImageIcon(getClass().getResource("/images/salary1.png")));
+        lblSalary.setIcon(new ImageIcon(getClass().getResource("/images/salary.png")));
     }//GEN-LAST:event_lblSalaryMouseExited
 
     private void lblSalaryMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalaryMousePressed
-        ViewVehicules vw = new ViewVehicules();
-        vw.setVisible(true);
+        ViewSalary vs = new ViewSalary();
+        vs.setVisible(true);
     }//GEN-LAST:event_lblSalaryMousePressed
 
     private void lblVehiculesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVehiculesMouseEntered
