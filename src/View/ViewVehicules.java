@@ -7,23 +7,30 @@ package View;
 
 import Classes.Vehicules;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Juergen Segura
  */
-public class ViewVehicules extends javax.swing.JFrame {
+public class ViewVehicules extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form ViewVehicules
      */
+    
+    
+    
     public ViewVehicules() {
         initComponents();
         this.setLocationRelativeTo(null);
         defaultTable();
+        this.updateTablelModel();
+        
     }
-     Control.VehiculesControl Vh=new Control.VehiculesControl();
+    Control.VehiculesControl Vh=new Control.VehiculesControl();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -40,6 +47,7 @@ public class ViewVehicules extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btnViewDetails = new javax.swing.JButton();
         btnNewVehicule = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -83,6 +91,13 @@ public class ViewVehicules extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,8 +112,10 @@ public class ViewVehicules extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnViewDetails)
                         .addGap(18, 18, 18)
-                        .addComponent(btnNewVehicule)))
-                .addContainerGap(724, Short.MAX_VALUE))
+                        .addComponent(btnNewVehicule)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(685, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -115,7 +132,8 @@ public class ViewVehicules extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnViewDetails)
-                    .addComponent(btnNewVehicule))
+                    .addComponent(btnNewVehicule)
+                    .addComponent(jButton1))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -157,8 +175,18 @@ public class ViewVehicules extends javax.swing.JFrame {
 
     private void btnNewVehiculeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewVehiculeActionPerformed
         ViewNewVehicule vnv = new ViewNewVehicule();
+        vnv.agregarObservador(this);
         vnv.setVisible(true);
+        updateTablelModel();
     }//GEN-LAST:event_btnNewVehiculeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTable1.getSelectedRow() >=0){
+             Vehicules vehicule = Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+             Vh.deleteVehicule(vehicule);
+        }
+        updateTablelModel();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void defaultTable(){
         DefaultTableModel tb = new DefaultTableModel();
@@ -167,6 +195,23 @@ public class ViewVehicules extends javax.swing.JFrame {
         tb.addColumn("Model");
         jTable1.setModel(tb);
     }
+    
+    public void updateTablelModel(){
+        DefaultTableModel tb = new DefaultTableModel();
+        tb.addColumn("Vehicule DNI");
+        tb.addColumn("Brand");
+        tb.addColumn("Model");
+        ArrayList<Vehicules> vehicules = Vh.vehiculesList();
+        for (int i = 0; i < vehicules.size(); i++) {
+            Object [] fil = new Object[3];
+            fil[0] = vehicules.get(i).getVehiculeDNI();
+            fil[1] = vehicules.get(i).getBrand();
+            fil[2] = vehicules.get(i).getModel();
+            tb.addRow(fil);
+        }
+        jTable1.setModel(tb);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -205,9 +250,15 @@ public class ViewVehicules extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNewVehicule;
     private javax.swing.JButton btnViewDetails;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFDNI;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.updateTablelModel();
+    }
 }

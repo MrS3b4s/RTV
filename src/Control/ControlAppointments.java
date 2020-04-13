@@ -21,7 +21,8 @@ import java.util.logging.Logger;
  * @author Andrey
  */
 public class ControlAppointments {
-     int appointment = 0;
+
+    int appointment = 0;
 
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -40,16 +41,16 @@ public class ControlAppointments {
     }
 
     public int verify(Appointment appoint) {
-       
+
         try {
-        ResultSet resultSet = Desktop.db.search("SELECT * FROM `appointments` where DATE='" + appoint.getDate() + "' AND HOUR= '"+appoint.getTime()+"'");
-            while(resultSet.next()){
+            ResultSet resultSet = Desktop.db.search("SELECT * FROM `appointments` where DATE='" + appoint.getDate() + "' AND HOUR= '" + appoint.getTime() + "'");
+            while (resultSet.next()) {
                 appointment++;
                 System.out.println(appointment);
             }
-             System.out.println(appointment);
+            System.out.println(appointment);
             return appointment;
-              
+
         } catch (SQLException ex) {
             //Logger.getLogger(ControladorVehiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,9 +58,14 @@ public class ControlAppointments {
     }
 
     public boolean verifyCarDNI(Vehicules vehicule) {
-        ResultSet resultSet = Desktop.db.search("SELECT  FROM appointments where vehiculeDNI='" + vehicule.getVehiculeDNI() + "'");
-        if (resultSet != null) {
-            return true;
+        ResultSet resultSet = Desktop.db.search("SELECT * FROM appointments where vehiculeDNI='" + vehicule.getVehiculeDNI() + "'");
+        System.out.println(resultSet);
+        try {
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlAppointments.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }

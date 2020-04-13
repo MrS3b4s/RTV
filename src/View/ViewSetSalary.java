@@ -90,6 +90,11 @@ public class ViewSetSalary extends javax.swing.JFrame {
         jLabel3.setText("Salary :");
 
         jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnSet.setText("Set");
         btnSet.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +159,12 @@ public class ViewSetSalary extends javax.swing.JFrame {
         Sal2.insertData(Integer.parseInt(this.user.getDni()), txtSalary.getText());
 
         System.out.println("Agregado");
+        this.dispose();
     }//GEN-LAST:event_btnSetActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

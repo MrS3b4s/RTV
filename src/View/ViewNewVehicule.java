@@ -7,6 +7,8 @@ package View;
 
 import Classes.Vehicules;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +20,23 @@ public class ViewNewVehicule extends javax.swing.JFrame {
     /**
      * Creates new form ViewNewVehicule
      */
+    
+    private ArrayList<Observer> observadores = new ArrayList<>();
+    
+    public void agregarObservador(Observer o){
+        this.observadores.add(o);
+    }
+    
+    public void quitarObservador(Observer o){
+        this.observadores.remove(o);
+    }
+    
+    public void notificarObservadores(){
+        for(Observer obj : observadores){
+            obj.update(null, null);
+        }
+    }
+    
     public ViewNewVehicule() {
         initComponents(); 
         this.setLocationRelativeTo(null);
@@ -205,6 +224,7 @@ public class ViewNewVehicule extends javax.swing.JFrame {
                 jTFNameOwner.getText());
         if(Vh.addVehicule(vehicule)){
             JOptionPane.showMessageDialog(this, "Vehicule successfully added.");
+            this.notificarObservadores();
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Vehicule added without success.");

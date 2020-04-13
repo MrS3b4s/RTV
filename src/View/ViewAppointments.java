@@ -25,7 +25,7 @@ public class ViewAppointments extends javax.swing.JFrame {
     }
     Control.VehiculesControl Vh = new Control.VehiculesControl();
     Control.ControlAppointments Ap = new ControlAppointments();
-    Vehicules vehicule = new Vehicules();
+    Vehicules vehicule;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,7 +228,7 @@ public class ViewAppointments extends javax.swing.JFrame {
     private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
         if (txtDNI != null) {
             try {
-                vehicule = Vh.searchVehicule(txtDNI.getText());
+                this.vehicule = Vh.searchVehicule(txtDNI.getText());
                 txtbrand.setText(vehicule.getBrand());
                 txtmodel.setText(vehicule.getModel());
                 spinyear.setValue(vehicule.getYear());
@@ -271,18 +271,19 @@ public class ViewAppointments extends javax.swing.JFrame {
         String[] hora1 = String.valueOf(cmbhour.getSelectedItem()).split(":");
         appointment.setTime(new java.sql.Time(Integer.parseInt(hora1[0]), Integer.parseInt(hora1[1]), 0));
 
-        if (Ap.verify(appointment) == 4) {
-            JOptionPane.showMessageDialog(null, "Sorry!\nThis schedule is full.\n Please, chage it", "Error", 0);
-        } else if (Ap.verifyCarDNI(vehicule)) {
-            JOptionPane.showMessageDialog(this, "This Car have an appointment");
-
-        } else {
-            if (Ap.addAppointment(appointment, vehicule)) {
-                JOptionPane.showMessageDialog(this, "Appointment successfully added.");
-                this.dispose();
+        if (Ap.verify(appointment) != 4) {
+            if (!Ap.verifyCarDNI(vehicule)) {
+                if (Ap.addAppointment(appointment, vehicule)) {
+                    JOptionPane.showMessageDialog(this, "Appointment successfully added.");
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Appointment added without success.");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Appointment added without success.");
+                JOptionPane.showMessageDialog(this, "This Car have an appointment");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Sorry!\nThis schedule is full.\n Please, chage it", "Error", 0);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed

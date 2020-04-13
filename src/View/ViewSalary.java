@@ -181,11 +181,16 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnAddsalaryActionPerformed
 
     private void btnInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformationActionPerformed
-        if (jTable1.getSelectedRow() >= 0) {
-            User user = Desktop.userscontrol.searchDNI((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-            Deductions vew = new Deductions(user);
-            vew.agregarObservador(this);
-            vew.setVisible(true);
+        
+        try {
+            if (jTable1.getSelectedRow() >= 0) {
+                User user = Desktop.userscontrol.searchDNI((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+                Deductions vew = new Deductions(user);
+                vew.agregarObservador(this);
+                vew.setVisible(true);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }//GEN-LAST:event_btnInformationActionPerformed
 

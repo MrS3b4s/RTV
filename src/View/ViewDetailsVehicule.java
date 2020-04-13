@@ -64,7 +64,7 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
         jTFAgeVehicule = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         btnOk = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -119,10 +119,10 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -156,11 +156,11 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(btnDelete)
-                .addGap(56, 56, 56)
+                .addGap(50, 50, 50)
+                .addComponent(jButton1)
+                .addGap(69, 69, 69)
                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +202,7 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
-                    .addComponent(btnDelete))
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -225,18 +225,13 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        if(Vh.deleteVehicule(vehicule)){
-            JOptionPane.showMessageDialog(this, "Vehicule successfully removed");
-            this.dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "The vehicule could not be remove. Try again");
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
     private void jTFAgeVehiculeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAgeVehiculeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFAgeVehiculeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
    
     private void disableJTF(){
         jTFYear.setEditable(false);
@@ -291,8 +286,8 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnOk;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

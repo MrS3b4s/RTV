@@ -51,10 +51,7 @@ public class VehiculesControl {
     }
     
     public boolean deleteVehicule(Vehicules vehicule){
-        if(vehiculesList().size() >=2){
-            return Desktop.db.delete("delete from vehicules where vehiculeDNI='"+vehicule.getVehiculeDNI()+"'");
-        }
-        return false;
+        return Desktop.db.delete("delete from vehicules where vehiculeDNI='"+vehicule.getVehiculeDNI()+"'");
     }
     
     public ArrayList vehiculesList(){
