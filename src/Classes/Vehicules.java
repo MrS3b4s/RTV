@@ -12,6 +12,9 @@ import java.util.Date;
  * @author Andrey
  */
 public class Vehicules {
+
+    public Vehicules() {
+    }
     
     private String vehiculeDNI;
     private String brand;
