@@ -40,6 +40,7 @@ public class Deductions extends javax.swing.JFrame {
 
     public Deductions() {
         initComponents();
+        this.setUndecorated(true);
     }
     double rent = 0;
 

@@ -46,11 +46,14 @@ public class ViewEditUser extends javax.swing.JFrame {
     private static String userName;
     
     public ViewEditUser() {
+         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+       
     }
     
     public ViewEditUser(User user) {
+         this.setUndecorated(true);
         this.user = user;
         this.userName = user.getUserName();
         initComponents();

@@ -22,6 +22,7 @@ public class ViewAppointments extends javax.swing.JFrame {
      */
     public ViewAppointments() {
         initComponents();
+        this.setUndecorated(true);
     }
     Control.VehiculesControl Vh = new Control.VehiculesControl();
     Control.ControlAppointments Ap = new ControlAppointments();

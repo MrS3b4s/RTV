@@ -30,6 +30,7 @@ public class ViewLogin extends javax.swing.JDialog {
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
         panelFondo.setBackground(Color.WHITE);
         add(panelFondo);
+//        this.setUndecorated(true);
     }
 
     /**

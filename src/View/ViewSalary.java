@@ -21,6 +21,7 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
      * Creates new form ViewSalary
      */
     public ViewSalary() {
+        this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         DefaultTableModel tb = new DefaultTableModel();
@@ -96,6 +97,11 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
         });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         txtDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,6 +199,10 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
             System.out.println(e);
         }
     }//GEN-LAST:event_btnInformationActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments

@@ -40,6 +40,7 @@ public class ViewSetSalary extends javax.swing.JFrame {
     Control.Salarycontrol Sal2 = new Control.Salarycontrol();
 
     public ViewSetSalary() {
+        this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
     }

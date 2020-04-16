@@ -40,7 +40,7 @@ public class ViewNewVehicule extends javax.swing.JFrame {
     public ViewNewVehicule() {
         initComponents(); 
         this.setLocationRelativeTo(null);
-        
+      
     }
      Control.VehiculesControl Vh=new Control.VehiculesControl();
 
