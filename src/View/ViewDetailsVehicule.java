@@ -6,26 +6,36 @@
 package View;
 
 import Classes.Vehicules;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Juergen Segura
  */
 public class ViewDetailsVehicule extends javax.swing.JFrame {
+
     public Vehicules vehicule;
+
     /**
      * Creates new form ViewCars
      */
     public ViewDetailsVehicule() {
         initComponents();
         disableJTF();
+        this.setResizable(false);
+        JPanel panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     public ViewDetailsVehicule(Vehicules vehicule) {
         this.vehicule = vehicule;
-        this.setUndecorated(true);
+
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         jTFDNIVehicule.setText(this.vehicule.getVehiculeDNI());
         jTFBrand.setText(this.vehicule.getBrand());
@@ -36,8 +46,13 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
         jTFDNIOwner.setText(String.valueOf(this.vehicule.getOwnerDNI()));
         jTFAgeVehicule.setText(String.valueOf(this.vehicule.AgeVehicule()));
         disableJTF();
+        JPanel panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
-    Control.VehiculesControl Vh=new Control.VehiculesControl();
+    Control.VehiculesControl Vh = new Control.VehiculesControl();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -233,8 +248,8 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-   
-    private void disableJTF(){
+
+    private void disableJTF() {
         jTFYear.setEditable(false);
         jTFNameOwner.setEditable(false);
         jTFModel.setEditable(false);
@@ -242,8 +257,9 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
         jTFDNIOwner.setEditable(false);
         jTFBrand.setEditable(false);
         jTFAgeVehicule.setEditable(false);
-        
+
     }
+
     /**
      * @param args the command line arguments
      */

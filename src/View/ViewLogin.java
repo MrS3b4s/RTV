@@ -19,13 +19,13 @@ public class ViewLogin extends javax.swing.JDialog {
     /**
      * Creates new form ViewLoginJ
      */
-    
     private JPanel panelFondo;
-    
+
     public ViewLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         panelFondo = new JPanel();
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
         panelFondo.setBackground(Color.WHITE);
@@ -108,8 +108,8 @@ public class ViewLogin extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!jTextField1.getText().isEmpty() && !jPasswordField1.getText().isEmpty()) {
             User user = Desktop.userscontrol.searchUser(jTextField1.getText());
-            if(user != null){
-                if(user.getPassword().equals(jPasswordField1.getText())){
+            if (user != null) {
+                if (user.getPassword().equals(jPasswordField1.getText())) {
                     Desktop.currentUser = user;
                     this.dispose();
                 } else {

@@ -18,18 +18,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Sebas
  */
-public class ViewUsers extends javax.swing.JFrame implements Observer{
+public class ViewUsers extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form ViewUsers
      */
-    
     private JPanel panelFondo;
-    
-    
+
     public ViewUsers() {
-        this.setUndecorated(true);
+
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("DNI");
@@ -41,17 +40,14 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
         tb.addColumn("Technician");
         jTable1.setModel(tb);
         this.update(null, null);
-        
-        
-                
-        
+
         panelFondo = new JPanel();
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
         panelFondo.setBackground(Color.WHITE);
         add(panelFondo);
     }
-    
-    public void updateTableModel(){
+
+    public void updateTableModel() {
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("DNI");
         tb.addColumn("Name");
@@ -73,7 +69,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
             tb.addRow(row);
         }
         jTable1.setModel(tb);
-        
+
     }
 
     /**
@@ -226,8 +222,8 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_txtFilterNameKeyReleased
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(jTable1.getSelectedRow() >= 0){
-            User user = Desktop.userscontrol.searchUser((String)jTable1.getValueAt(jTable1.getSelectedRow(), 5));
+        if (jTable1.getSelectedRow() >= 0) {
+            User user = Desktop.userscontrol.searchUser((String) jTable1.getValueAt(jTable1.getSelectedRow(), 5));
             ViewEditUser vew = new ViewEditUser(user);
             vew.agregarObservador(this);
             vew.setVisible(true);
@@ -235,9 +231,9 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jTable1.getSelectedRow() >= 0){
-            User user = Desktop.userscontrol.searchUser((String)jTable1.getValueAt(jTable1.getSelectedRow(), 5));
-            if(Desktop.userscontrol.deleteUser(user)){
+        if (jTable1.getSelectedRow() >= 0) {
+            User user = Desktop.userscontrol.searchUser((String) jTable1.getValueAt(jTable1.getSelectedRow(), 5));
+            if (Desktop.userscontrol.deleteUser(user)) {
                 JOptionPane.showMessageDialog(this, "Delete success");
             } else {
                 JOptionPane.showMessageDialog(this, "Delete failed");
@@ -247,7 +243,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-this.dispose();        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

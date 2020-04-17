@@ -6,10 +6,12 @@
 package View;
 
 import Classes.Vehicules;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,29 +22,33 @@ public class ViewNewVehicule extends javax.swing.JFrame {
     /**
      * Creates new form ViewNewVehicule
      */
-    
     private ArrayList<Observer> observadores = new ArrayList<>();
-    
-    public void agregarObservador(Observer o){
+
+    public void agregarObservador(Observer o) {
         this.observadores.add(o);
     }
-    
-    public void quitarObservador(Observer o){
+
+    public void quitarObservador(Observer o) {
         this.observadores.remove(o);
     }
-    
-    public void notificarObservadores(){
-        for(Observer obj : observadores){
+
+    public void notificarObservadores() {
+        for (Observer obj : observadores) {
             obj.update(null, null);
         }
     }
-    
+
     public ViewNewVehicule() {
-        initComponents(); 
+        initComponents();
         this.setLocationRelativeTo(null);
-      
+        this.setResizable(false);
+        JPanel panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
+
     }
-     Control.VehiculesControl Vh=new Control.VehiculesControl();
+    Control.VehiculesControl Vh = new Control.VehiculesControl();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,8 +219,8 @@ public class ViewNewVehicule extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFYearActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String[] d =new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate()).split("-");
-        java.sql.Date date = new java.sql.Date(Integer.parseInt(d[0])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[2]));
+        String[] d = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate()).split("-");
+        java.sql.Date date = new java.sql.Date(Integer.parseInt(d[0]) - 1900, Integer.parseInt(d[1]) - 1, Integer.parseInt(d[2]));
         Vehicules vehicule = new Vehicules(jTFDNIVehicule.getText(),
                 jTFBrand.getText(),
                 jTFModel.getText(),
@@ -222,14 +228,14 @@ public class ViewNewVehicule extends javax.swing.JFrame {
                 date,
                 Integer.parseInt(jTFDNIOwner.getText()),
                 jTFNameOwner.getText());
-        if(Vh.addVehicule(vehicule)){
+        if (Vh.addVehicule(vehicule)) {
             JOptionPane.showMessageDialog(this, "Vehicule successfully added.");
             this.notificarObservadores();
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Vehicule added without success.");
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

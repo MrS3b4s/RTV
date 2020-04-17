@@ -33,7 +33,7 @@ public class ViewConfigDB extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-     
+        this.setResizable(false);
         
         panelFondo = new JPanel();
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());

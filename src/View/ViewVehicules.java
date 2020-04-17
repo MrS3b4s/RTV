@@ -6,31 +6,35 @@
 package View;
 
 import Classes.Vehicules;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Juergen Segura
  */
-public class ViewVehicules extends javax.swing.JFrame implements Observer{
+public class ViewVehicules extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form ViewVehicules
      */
-    
-    
-    
     public ViewVehicules() {
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         defaultTable();
         this.updateTablelModel();
-        
+        JPanel panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
+
     }
-    Control.VehiculesControl Vh=new Control.VehiculesControl();
+    Control.VehiculesControl Vh = new Control.VehiculesControl();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,7 +160,7 @@ public class ViewVehicules extends javax.swing.JFrame implements Observer{
         tb.addColumn("Model");
         ArrayList<Vehicules> vehicules = Vh.filterVehiculesListByDNI(jTFDNI.getText());
         for (int i = 0; i < vehicules.size(); i++) {
-            Object [] fil = new Object[3];
+            Object[] fil = new Object[3];
             fil[0] = vehicules.get(i).getVehiculeDNI();
             fil[1] = vehicules.get(i).getBrand();
             fil[2] = vehicules.get(i).getModel();
@@ -166,8 +170,8 @@ public class ViewVehicules extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jTFDNIKeyReleased
 
     private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
-        if(jTable1.getSelectedRow() >=0){
-            Vehicules vehicule = Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        if (jTable1.getSelectedRow() >= 0) {
+            Vehicules vehicule = Vh.searchVehicule((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
             ViewDetailsVehicule view = new ViewDetailsVehicule(vehicule);
             view.setVisible(rootPaneCheckingEnabled);
         }
@@ -181,29 +185,29 @@ public class ViewVehicules extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnNewVehiculeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jTable1.getSelectedRow() >=0){
-             Vehicules vehicule = Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-             Vh.deleteVehicule(vehicule);
+        if (jTable1.getSelectedRow() >= 0) {
+            Vehicules vehicule = Vh.searchVehicule((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            Vh.deleteVehicule(vehicule);
         }
         updateTablelModel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void defaultTable(){
+    public void defaultTable() {
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn(" Vehicule DNI");
         tb.addColumn("Brand");
         tb.addColumn("Model");
         jTable1.setModel(tb);
     }
-    
-    public void updateTablelModel(){
+
+    public void updateTablelModel() {
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("Vehicule DNI");
         tb.addColumn("Brand");
         tb.addColumn("Model");
         ArrayList<Vehicules> vehicules = Vh.vehiculesList();
         for (int i = 0; i < vehicules.size(); i++) {
-            Object [] fil = new Object[3];
+            Object[] fil = new Object[3];
             fil[0] = vehicules.get(i).getVehiculeDNI();
             fil[1] = vehicules.get(i).getBrand();
             fil[2] = vehicules.get(i).getModel();
@@ -211,7 +215,7 @@ public class ViewVehicules extends javax.swing.JFrame implements Observer{
         }
         jTable1.setModel(tb);
     }
-    
+
     /**
      * @param args the command line arguments
      */

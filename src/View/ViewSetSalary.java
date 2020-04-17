@@ -6,8 +6,11 @@
 package View;
 
 import Classes.User;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observer;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -40,15 +43,17 @@ public class ViewSetSalary extends javax.swing.JFrame {
     Control.Salarycontrol Sal2 = new Control.Salarycontrol();
 
     public ViewSetSalary() {
-        this.setUndecorated(true);
+
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     public ViewSetSalary(User user) {
         this.user = user;
 //        this.userName = user.getUserName();
         initComponents();
+        this.setResizable(false);
         // txtDNI.setText(this.user.getDni());
         System.out.println(this.user.getFullName());
         txtFullName.setText(this.user.getFullName());
@@ -60,6 +65,10 @@ public class ViewSetSalary extends javax.swing.JFrame {
         //    jCheckBox1.setSelected(true);
         //}
         this.setLocationRelativeTo(null);
+        JPanel panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     /**
@@ -156,11 +165,15 @@ public class ViewSetSalary extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetActionPerformed
-        Sal2.checkBd();
-        Sal2.insertData(Integer.parseInt(this.user.getDni()), txtSalary.getText());
+        if (!"".equals(txtSalary.getText())) {
+            Sal2.checkBd();
+            Sal2.insertData(Integer.parseInt(this.user.getDni()), txtSalary.getText());
 
-        System.out.println("Agregado");
-        this.dispose();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Salary cannot be blank");
+        }
+
     }//GEN-LAST:event_btnSetActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

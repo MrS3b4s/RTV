@@ -26,7 +26,7 @@ public class ViewChangePassword extends javax.swing.JDialog {
     public ViewChangePassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-      
+        this.setResizable(false);
         panelFondo = new JPanel();
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
         panelFondo.setBackground(Color.WHITE);

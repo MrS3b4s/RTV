@@ -8,8 +8,10 @@ package View;
 import Classes.Appointment;
 import Classes.Vehicules;
 import Control.ControlAppointments;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,7 +24,12 @@ public class ViewAppointments extends javax.swing.JFrame {
      */
     public ViewAppointments() {
         initComponents();
-        this.setUndecorated(true);
+        this.setResizable(false);
+        JPanel panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
+
     }
     Control.VehiculesControl Vh = new Control.VehiculesControl();
     Control.ControlAppointments Ap = new ControlAppointments();

@@ -6,9 +6,12 @@
 package View;
 
 import Classes.User;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,8 +24,9 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
      * Creates new form ViewSalary
      */
     public ViewSalary() {
-        this.setUndecorated(true);
+
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("DNI");
@@ -30,7 +34,10 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
 
         jTable1.setModel(tb);
         this.update(null, null);
-
+        JPanel panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     public void updateTableModel() {
@@ -187,7 +194,7 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnAddsalaryActionPerformed
 
     private void btnInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformationActionPerformed
-        
+
         try {
             if (jTable1.getSelectedRow() >= 0) {
                 User user = Desktop.userscontrol.searchDNI((String) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
@@ -196,12 +203,12 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
                 vew.setVisible(true);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Error");
         }
     }//GEN-LAST:event_btnInformationActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-this.dispose();        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
 
     /**

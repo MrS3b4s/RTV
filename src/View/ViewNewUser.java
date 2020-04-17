@@ -22,35 +22,34 @@ public class ViewNewUser extends javax.swing.JDialog {
     /**
      * Creates new form ViewNewUser
      */
-    
     private JPanel panelFondo;
-    
+
     private ArrayList<Observer> observadores = new ArrayList<>();
-    
-    public void agregarObservador(Observer o){
+
+    public void agregarObservador(Observer o) {
         this.observadores.add(o);
     }
-    
-    public void quitarObservador(Observer o){
+
+    public void quitarObservador(Observer o) {
         this.observadores.remove(o);
     }
-    
-    public void notificarObservadores(){
-        for(Observer obj : observadores){
+
+    public void notificarObservadores() {
+        for (Observer obj : observadores) {
             obj.update(null, null);
         }
     }
-    
+
     public ViewNewUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        this.setResizable(false);
         panelFondo = new JPanel();
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
         panelFondo.setBackground(Color.WHITE);
         add(panelFondo);
-      
+
     }
 
     /**
@@ -206,27 +205,27 @@ public class ViewNewUser extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String[] d =new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser.getDate()).split("-");
-        java.sql.Date date = new java.sql.Date(Integer.parseInt(d[0])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[2]));
+        String[] d = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser.getDate()).split("-");
+        java.sql.Date date = new java.sql.Date(Integer.parseInt(d[0]) - 1900, Integer.parseInt(d[1]) - 1, Integer.parseInt(d[2]));
         User user = new User(
                 txtDNI.getText(),
-                txtFullName.getText(), 
-                date, 
-                Integer.parseInt(txtPhone.getText()), 
-                txtEmail.getText(), 
-                txtUser.getText(), 
+                txtFullName.getText(),
+                date,
+                Integer.parseInt(txtPhone.getText()),
+                txtEmail.getText(),
+                txtUser.getText(),
                 txtPassword.getText(),
                 jCheckBox1.isSelected()
         );
-        
-       if(Desktop.userscontrol.addUser(user)){
+
+        if (Desktop.userscontrol.addUser(user)) {
             JOptionPane.showMessageDialog(this, "User successfully added.");
             this.notificarObservadores();
             this.dispose();
-       } else {
+        } else {
             JOptionPane.showMessageDialog(this, "User added without success.");
-       }
-        
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

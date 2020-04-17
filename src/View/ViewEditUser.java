@@ -22,38 +22,36 @@ public class ViewEditUser extends javax.swing.JFrame {
     /**
      * Creates new form ViewEditUser
      */
-    
     private JPanel panelFondo;
-    
+
     private ArrayList<Observer> observadores = new ArrayList<>();
-    
-    public void agregarObservador(Observer o){
+
+    public void agregarObservador(Observer o) {
         this.observadores.add(o);
     }
-    
-    public void quitarObservador(Observer o){
+
+    public void quitarObservador(Observer o) {
         this.observadores.remove(o);
     }
-    
-    public void notificarObservadores(){
-        for(Observer obj : observadores){
+
+    public void notificarObservadores() {
+        for (Observer obj : observadores) {
             obj.update(null, null);
         }
     }
-    
-    
+
     public static User user;
     private static String userName;
-    
+
     public ViewEditUser() {
-         this.setUndecorated(true);
+
         initComponents();
         this.setLocationRelativeTo(null);
-       
+        this.setResizable(false);
     }
-    
+
     public ViewEditUser(User user) {
-         this.setUndecorated(true);
+        this.setUndecorated(true);
         this.user = user;
         this.userName = user.getUserName();
         initComponents();
@@ -67,7 +65,7 @@ public class ViewEditUser extends javax.swing.JFrame {
             jCheckBox1.setSelected(true);
         }
         this.setLocationRelativeTo(null);
-        
+        this.setResizable(false);
         panelFondo = new JPanel();
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
         panelFondo.setBackground(Color.WHITE);
@@ -255,24 +253,24 @@ public class ViewEditUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String[] d =new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser.getDate()).split("-");
-        java.sql.Date date = new java.sql.Date(Integer.parseInt(d[0])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[2]));
+        String[] d = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser.getDate()).split("-");
+        java.sql.Date date = new java.sql.Date(Integer.parseInt(d[0]) - 1900, Integer.parseInt(d[1]) - 1, Integer.parseInt(d[2]));
         User user = new User(
                 txtDNI.getText(),
-                txtFullName.getText(), 
-                date, 
-                Integer.parseInt(txtPhone.getText()), 
-                txtEmail.getText(), 
-                txtUser.getText(), 
+                txtFullName.getText(),
+                date,
+                Integer.parseInt(txtPhone.getText()),
+                txtEmail.getText(),
+                txtUser.getText(),
                 ViewEditUser.user.getPassword(),
                 jCheckBox1.isSelected()
         );
-        
-        if(Desktop.userscontrol.updateUser(user, this.userName)){
-            
+
+        if (Desktop.userscontrol.updateUser(user, this.userName)) {
+
             JOptionPane.showMessageDialog(this, "update successful");
         }
-        
+
         this.notificarObservadores();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
