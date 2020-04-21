@@ -15,6 +15,7 @@ import java.sql.Time;
 public class Appointment {
     private Date date;
     private Time time;
+    private Vehicules vehicule;
 
     public Appointment() {
     }
@@ -35,9 +36,23 @@ public class Appointment {
         this.time = time;
     }
 
+    public Vehicules getVehicule() {
+        return vehicule;
+    }
+
+    public void setVehicule(Vehicules vehicule) {
+        this.vehicule = vehicule;
+    }
+    
     public Appointment(Date date, Time time) {
         this.date = date;
         this.time = time;
+    }
+    
+    public Appointment(Date date, Time time, Vehicules vehicule) {
+        this.date = date;
+        this.time = time;
+        this.vehicule = vehicule;
     }
     
     

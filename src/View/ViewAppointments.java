@@ -265,6 +265,9 @@ public class ViewAppointments extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Appointment appointment = new Appointment();
+        
+        appointment.setVehicule(vehicule);
+        
         String[] fecha = new SimpleDateFormat("yyyy-MM-dd").format(txtDatecite.getDate()).split("-");
         appointment.setDate(new java.sql.Date(Integer.parseInt(fecha[0]) - 1900, Integer.parseInt(fecha[1]) - 1, Integer.parseInt(fecha[2])));
 

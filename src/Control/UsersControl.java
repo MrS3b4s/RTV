@@ -45,7 +45,6 @@ public class UsersControl {
     }
     
     public User searchUser(String userName){
-        System.out.println(userName);
         ResultSet resultSet = Desktop.db.search("SELECT * FROM `users` where User='"+userName+"'");
         if(resultSet != null){
             try {

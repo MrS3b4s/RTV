@@ -64,6 +64,8 @@ public class Desktop extends javax.swing.JFrame {
         lbltextVehicules = new javax.swing.JLabel();
         lblappointment = new javax.swing.JLabel();
         lbltextVehicules1 = new javax.swing.JLabel();
+        lblRevisions = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -157,6 +159,22 @@ public class Desktop extends javax.swing.JFrame {
         lbltextVehicules1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbltextVehicules1.setText("Appointments");
 
+        lblRevisions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/shopping-list.png"))); // NOI18N
+        lblRevisions.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblRevisionsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblRevisionsMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblRevisionsMouseReleased(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel3.setText("Revisions");
+
         jDesktopPane1.setLayer(lblUsers, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(lblConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -166,38 +184,43 @@ public class Desktop extends javax.swing.JFrame {
         jDesktopPane1.setLayer(lbltextVehicules, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(lblappointment, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(lbltextVehicules1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lblRevisions, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(321, 321, 321)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbltextSalary))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(lblUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(lblSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap(1253, Short.MAX_VALUE)
-                        .addComponent(lblConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(73, 73, 73)
+                        .addComponent(lbltextVehicules)
+                        .addGap(45, 45, 45)
+                        .addComponent(lbltextVehicules1))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(321, 321, 321)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbltextSalary))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(lblUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79)
-                                .addComponent(lblSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(lblVehicules, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(92, 92, 92)
-                                .addComponent(lblappointment, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(lbltextVehicules)
-                                .addGap(45, 45, 45)
-                                .addComponent(lbltextVehicules1)))))
+                        .addGap(88, 88, 88)
+                        .addComponent(lblVehicules, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(lblappointment, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRevisions, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(306, 306, 306))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -207,16 +230,19 @@ public class Desktop extends javax.swing.JFrame {
                 .addComponent(lblConfig)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblVehicules, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblUsers, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblSalary, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblappointment, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblRevisions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblVehicules, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblUsers, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblSalary, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblappointment, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbltextVehicules, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(lbltextSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(lbltextVehicules1))
+                    .addComponent(lbltextVehicules1)
+                    .addComponent(jLabel3))
                 .addGap(500, 500, 500))
         );
 
@@ -224,7 +250,10 @@ public class Desktop extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,6 +330,19 @@ public class Desktop extends javax.swing.JFrame {
         vw.setVisible(true);
     }//GEN-LAST:event_lblappointmentMousePressed
 
+    private void lblRevisionsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRevisionsMouseEntered
+        lblRevisions.setIcon(new ImageIcon(getClass().getResource("/images/shopping-list2.png")));
+    }//GEN-LAST:event_lblRevisionsMouseEntered
+
+    private void lblRevisionsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRevisionsMouseExited
+        lblRevisions.setIcon(new ImageIcon(getClass().getResource("/images/shopping-list.png")));
+    }//GEN-LAST:event_lblRevisionsMouseExited
+
+    private void lblRevisionsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRevisionsMouseReleased
+        ViewRevisions va = new ViewRevisions();
+        va.setVisible(true);
+    }//GEN-LAST:event_lblRevisionsMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -339,8 +381,10 @@ public class Desktop extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel lblConfig;
+    private javax.swing.JLabel lblRevisions;
     private javax.swing.JLabel lblSalary;
     private javax.swing.JLabel lblUsers;
     private javax.swing.JLabel lblVehicules;

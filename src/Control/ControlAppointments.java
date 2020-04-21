@@ -6,6 +6,7 @@
 package Control;
 
 import Classes.Appointment;
+import Classes.User;
 import Classes.Vehicules;
 import View.Desktop;
 import java.sql.Date;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,5 +71,56 @@ public class ControlAppointments {
         }
         return false;
     }
+    
+    public ArrayList appoinmentList(){
+        ArrayList<Appointment> a = new ArrayList<>();
+        ResultSet resultSet = Desktop.db.list("select * from appointments");
+        if(resultSet != null){
+            try {
+                while(resultSet.next()){
+                    a.add(new Appointment(
+                            resultSet.getDate(2),
+                            resultSet.getTime(3),
+                            new Vehicules(
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getString(6), 
+                                    resultSet.getInt(7),
+                                    resultSet.getDate(8),
+                                    resultSet.getInt(9),
+                                    resultSet.getString(10))
+                    ));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return a;
+    }
+    
+    public Appointment searchAppointment(String dni){
 
+        ResultSet resultSet = Desktop.db.search("SELECT * FROM `appointments` where vehiculeDNI='"+dni+"'");
+        if(resultSet != null){
+            try {
+                resultSet.next();
+                return new Appointment(
+                            resultSet.getDate(2),
+                            resultSet.getTime(3),
+                            new Vehicules(
+                                    resultSet.getString(4),
+                                    resultSet.getString(5),
+                                    resultSet.getString(6), 
+                                    resultSet.getInt(7),
+                                    resultSet.getDate(8),
+                                    resultSet.getInt(9),
+                                    resultSet.getString(10))
+                );
+            } catch (SQLException ex) {
+                System.out.println(ex);
+//                Logger.getLogger(UsersControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
+        return null;
+    }
 }
