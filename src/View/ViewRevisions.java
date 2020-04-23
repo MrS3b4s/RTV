@@ -6,12 +6,20 @@
 package View;
 
 import Classes.Appointment;
+import Classes.Revision;
+import Classes.User;
 import Classes.Vehicules;
 import Control.ControlAppointments;
+import Control.RevisionsControl;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,10 +34,12 @@ public class ViewRevisions extends javax.swing.JFrame {
 
     Control.VehiculesControl Vh = new Control.VehiculesControl();
     Control.ControlAppointments Ap = new ControlAppointments();
+    Control.RevisionsControl rc = new Control.RevisionsControl();
+    private Appointment ap;
 
     public ViewRevisions() {
         initComponents();
-
+        Clock();
         updateTablelModelAppointment();
 
         DefaultTableModel tb = new DefaultTableModel();
@@ -66,6 +76,31 @@ public class ViewRevisions extends javax.swing.JFrame {
         jTable2.setModel(tb);
     }
 
+    public void Clock() {
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm:ss");
+        Calendar fecha = new GregorianCalendar();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(500);
+                        String año = String.valueOf(fecha.get(Calendar.YEAR));
+                        String mes = String.valueOf(fecha.get(Calendar.MONTH));
+                        String dia = String.valueOf(fecha.get(Calendar.DAY_OF_MONTH));
+                        txtDate.setText(dia + "/" + mes + "/" + año);
+                        txthour.setText(formateador.format(LocalDateTime.now()));
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        Thread hilo = new Thread(runnable);
+        hilo.start();
+    }
+
     public void updateTablelModelAppointment() {
         DefaultTableModel tb = new DefaultTableModel();
 
@@ -100,11 +135,11 @@ public class ViewRevisions extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnabsent = new javax.swing.JButton();
+        btnpresent = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        btnsave = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
@@ -112,10 +147,10 @@ public class ViewRevisions extends javax.swing.JFrame {
         jrbRi = new javax.swing.JRadioButton();
         jrba = new javax.swing.JRadioButton();
         jrbr = new javax.swing.JRadioButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txthour = new javax.swing.JTextField();
+        txtDate = new javax.swing.JTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -136,17 +171,17 @@ public class ViewRevisions extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Absent");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnabsent.setText("Absent");
+        btnabsent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnabsentActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Present");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnpresent.setText("Present");
+        btnpresent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnpresentActionPerformed(evt);
             }
         });
 
@@ -166,10 +201,10 @@ public class ViewRevisions extends javax.swing.JFrame {
         jTable2.setAutoscrolls(false);
         jScrollPane2.setViewportView(jTable2);
 
-        jButton3.setText("Save");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnsave.setText("Save");
+        btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnsaveActionPerformed(evt);
             }
         });
 
@@ -188,6 +223,10 @@ public class ViewRevisions extends javax.swing.JFrame {
         jLabel3.setText("Date");
 
         jLabel4.setText("Time");
+
+        txthour.setEditable(false);
+
+        txtDate.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,14 +252,14 @@ public class ViewRevisions extends javax.swing.JFrame {
                                     .addComponent(jrbRi)))
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField1)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+                            .addComponent(txthour)
+                            .addComponent(txtDate)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnabsent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnpresent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(btnsave)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -232,9 +271,9 @@ public class ViewRevisions extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
+                            .addComponent(btnabsent, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnpresent)
+                            .addComponent(btnsave))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,12 +287,12 @@ public class ViewRevisions extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
-                        .addGap(7, 7, 7)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txthour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jrba)
@@ -264,27 +303,41 @@ public class ViewRevisions extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnabsentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnabsentActionPerformed
         if (jTable1.getSelectedRow() > -1) {
             updateTablelModelVehicule(
-                    Ap.searchAppointment((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2))
+                    ap = Ap.searchAppointment((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2))
             );
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+            jTextPane1.setText("El vehículo no se presentó a la revisión");
+            jrbr.setSelected(true);
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        }
+    }//GEN-LAST:event_btnabsentActionPerformed
+
+    private void btnpresentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpresentActionPerformed
         if (jTable1.getSelectedRow() > -1) {
             updateTablelModelVehicule(
-                    Ap.searchAppointment((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2))
+                    ap = Ap.searchAppointment((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2))
             );
         }
-        jrbr.setSelected(true);
-        jTextPane1.setText("El vehículo no se presentó a la revisión");
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnpresentActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
+        System.out.println(Desktop.currentUser.getDni());
+        System.out.println((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+        System.out.println(Type());
+        System.out.println(jTextPane1.getText());
+        System.out.println(State());
+        Revision user = new Revision((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2), Desktop.currentUser.getDni(), Type(), jTextPane1.getText(), State());
+        if(rc.addRevision(user)){
+            JOptionPane.showMessageDialog(null, "Ready");
+            Ap.deleteapp(ap);
+        }
+            //JOptionPane.showMessageDialog(null, "Ready");
+           // Ap.deleteapp(ap);
+        
+
+    }//GEN-LAST:event_btnsaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,13 +375,12 @@ public class ViewRevisions extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnabsent;
+    private javax.swing.JButton btnpresent;
+    private javax.swing.JButton btnsave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -338,11 +390,31 @@ public class ViewRevisions extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JRadioButton jrbI;
     private javax.swing.JRadioButton jrbRi;
     private javax.swing.JRadioButton jrba;
     private javax.swing.JRadioButton jrbr;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txthour;
     // End of variables declaration//GEN-END:variables
+public String Type() {
+        if (!jrbI.isSelected() && !jrbRi.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Type of Revision can´t be empty");
+        }
+        if (jrbI.isSelected()) {
+            return jrbI.getText();
+        }
+        return jrbRi.getText();
+    }
+
+    public String State() {
+        if (!jrba.isSelected() && !jrbr.isSelected()) {
+            JOptionPane.showMessageDialog(null, "State of Revision can´t be empty");
+        }
+        if (jrba.isSelected()) {
+            return jrbI.getText();
+        }
+        return jrbr.getText();
+    }
 }

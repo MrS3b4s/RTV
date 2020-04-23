@@ -274,8 +274,8 @@ public class ViewAppointment extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtmodelActionPerformed
 
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
-        Appointment appointment = new Appointment();
 
+        Appointment appointment = new Appointment();
         appointment.setVehicule(vehicule);
 
         String[] fecha = new SimpleDateFormat("yyyy-MM-dd").format(txtDatecite.getDate()).split("-");
@@ -298,9 +298,10 @@ public class ViewAppointment extends javax.swing.JInternalFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Sorry!\nThis schedule is full.\n Please, chage it", "Error", 0);
+
         }
 
-        // Appointment user = new Appointment(date, time, vehicule);
+     
 
     }//GEN-LAST:event_btnsaveActionPerformed
 

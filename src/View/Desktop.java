@@ -31,12 +31,11 @@ public class Desktop extends javax.swing.JFrame {
             frm.setVisible(true);
             db.connect(new ConfigDB().getConfig());
         }
-        
-        
+
         ViewLogin vl = new ViewLogin(this, true);
         vl.setVisible(true);
-        
-        if(this.currentUser != null){
+
+        if (this.currentUser != null) {
             initComponents();
             this.setLocationRelativeTo(null);
         } else {
@@ -268,8 +267,10 @@ public class Desktop extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblUsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsersMousePressed
-        ViewUsers vw = new ViewUsers();
-        vw.setVisible(true);
+   
+            ViewUsers vw = new ViewUsers();
+            vw.setVisible(true);
+        
     }//GEN-LAST:event_lblUsersMousePressed
 
     private void lblUsersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsersMouseEntered
@@ -342,7 +343,7 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRevisionsMouseExited
 
     private void lblRevisionsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRevisionsMouseReleased
-        ViewRevisions va = new ViewRevisions();
+        ViewRevisions va  = new ViewRevisions();
         va.setVisible(true);
     }//GEN-LAST:event_lblRevisionsMouseReleased
 

@@ -20,8 +20,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewAppointments1 extends javax.swing.JInternalFrame implements Observer {
 
-   
     Control.ControlAppointments CA = new Control.ControlAppointments();
+
     /**
      * Creates new form ViewAppointments1
      */
@@ -68,7 +68,6 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btndelete = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
@@ -89,13 +88,6 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Edit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -120,9 +112,7 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btndelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
@@ -133,10 +123,9 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
                     .addComponent(btndelete)
                     .addComponent(jButton4))
                 .addContainerGap())
@@ -151,31 +140,24 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
         vw.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTable1.getSelectedRow() >= 0) {
-            
-            Appointment appointment = CA.searchAppointment((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2));
-            ViewAppointment vew = new ViewAppointment(appointment);
-            vew.agregarObservador(this);
-            Desktop.jDesktopPane1.add(vew);
-            vew.setVisible(true);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         if (jTable1.getSelectedRow() >= 0) {
-            
+
             Appointment user = CA.searchAppointment((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2));
-            if (CA.deleteapp(user)) {
-                JOptionPane.showMessageDialog(this, "Delete success");
-            } else {
-                JOptionPane.showMessageDialog(this, "Delete failed");
+            //System.out.println(user.getVehicule().getVehiculeDNI());
+            if (JOptionPane.showConfirmDialog(null, "Are you sure that you want\n delete this appointment?", "CONFIRMATION", 0) == 0) {
+                if (CA.deleteapp(user)) {
+                    JOptionPane.showMessageDialog(this, "Delete success");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Delete failed");
+                }
+                this.update(null, null);
             }
-            this.update(null, null);
+
         }
     }//GEN-LAST:event_btndeleteActionPerformed
 
@@ -183,7 +165,6 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btndelete;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

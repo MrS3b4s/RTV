@@ -72,7 +72,7 @@ public class ControlAppointments {
         return false;
     }
     public boolean deleteapp(Appointment appointment){
-        if(appoinmentList().size() >= 2){
+        if(appoinmentList().size() >= 1){
             return Desktop.db.delete("delete from appointments where vehiculeDNI='"+appointment.getVehicule().getVehiculeDNI()+"'");
         }
         return false;

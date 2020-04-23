@@ -40,7 +40,7 @@ public class ViewNewUser extends javax.swing.JDialog {
             obj.update(null, null);
         }
     }
-    
+    //
     public ViewNewUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -262,6 +262,7 @@ public class ViewNewUser extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 ViewNewUser dialog = new ViewNewUser(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
