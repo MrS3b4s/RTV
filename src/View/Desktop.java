@@ -73,6 +73,8 @@ public class Desktop extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+
         lblUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/users.png"))); // NOI18N
         lblUsers.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -326,7 +328,8 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_lblappointmentMouseExited
 
     private void lblappointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblappointmentMousePressed
-        ViewAppointments vw = new ViewAppointments();
+        ViewAppointments1 vw = new ViewAppointments1();
+        jDesktopPane1.add(vw);
         vw.setVisible(true);
     }//GEN-LAST:event_lblappointmentMousePressed
 
@@ -379,7 +382,7 @@ public class Desktop extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
