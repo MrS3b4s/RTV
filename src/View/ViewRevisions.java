@@ -6,6 +6,7 @@
 package View;
 
 import Classes.Appointment;
+import Classes.Revision;
 import Classes.Vehicules;
 import Control.ControlAppointments;
 import java.awt.Color;
@@ -26,7 +27,8 @@ public class ViewRevisions extends javax.swing.JFrame {
 
     Control.VehiculesControl Vh = new Control.VehiculesControl();
     Control.ControlAppointments Ap = new ControlAppointments();
-
+    Control.RevisionsControl rc = new Control.RevisionsControl();
+    
     public ViewRevisions() {
         initComponents();
 
@@ -262,7 +264,19 @@ public class ViewRevisions extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if (jTable1.getSelectedRow() > -1) {
+            Appointment ap = Ap.searchAppointment((String)jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+            Revision r = new Revision(
+                    ap.getId(),
+                    ap.getDate(),
+                    ap.getTime(),
+                    Desktop.currentUser.getDni(),
+                    false,
+                    "El vehículo no se presentó a la revisión",
+                    false
+            );
+            rc.addRevision(r);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

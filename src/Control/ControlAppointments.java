@@ -105,6 +105,7 @@ public class ControlAppointments {
             try {
                 resultSet.next();
                 return new Appointment(
+                            resultSet.getInt(1),
                             resultSet.getDate(2),
                             resultSet.getTime(3),
                             new Vehicules(

@@ -42,6 +42,14 @@ public class Desktop extends javax.swing.JFrame {
         } else {
             System.exit(0);
         }
+        
+        if (this.currentUser.getUserType()) {
+            lblRevisions.setVisible(true);
+            jLabel3.setVisible(true);
+        } else {
+            lblRevisions.setVisible(false);
+            jLabel3.setVisible(false);
+        }
     }
 
     /**

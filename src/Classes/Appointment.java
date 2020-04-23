@@ -13,6 +13,7 @@ import java.sql.Time;
  * @author Andrey
  */
 public class Appointment {
+    private int id;
     private Date date;
     private Time time;
     private Vehicules vehicule;
@@ -43,6 +44,16 @@ public class Appointment {
     public void setVehicule(Vehicules vehicule) {
         this.vehicule = vehicule;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     
     public Appointment(Date date, Time time) {
         this.date = date;
@@ -50,6 +61,12 @@ public class Appointment {
     }
     
     public Appointment(Date date, Time time, Vehicules vehicule) {
+        this.date = date;
+        this.time = time;
+        this.vehicule = vehicule;
+    }
+    
+    public Appointment(int id, Date date, Time time, Vehicules vehicule) {
         this.date = date;
         this.time = time;
         this.vehicule = vehicule;
