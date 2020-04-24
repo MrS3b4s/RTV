@@ -12,6 +12,10 @@ import Classes.Vehicules;
 import Control.ControlAppointments;
 import Control.RevisionsControl;
 import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -19,6 +23,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +37,7 @@ public class ViewRevisions extends javax.swing.JFrame {
      * Creates new form ViewRevisions
      */
     private JPanel panelFondo;
+    private Vehicules currentV;
 
     Control.VehiculesControl Vh = new Control.VehiculesControl();
     Control.ControlAppointments Ap = new ControlAppointments();
@@ -55,6 +62,8 @@ public class ViewRevisions extends javax.swing.JFrame {
         buttonGroup2.add(jrba);
         buttonGroup2.add(jrbr);
 
+        jrbI.setSelected(true);
+        
         panelFondo = new JPanel();
         panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
         panelFondo.setBackground(Color.WHITE);
@@ -152,6 +161,8 @@ public class ViewRevisions extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txthour = new javax.swing.JTextField();
         txtDate = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jXML = new javax.swing.JTextField();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -229,6 +240,20 @@ public class ViewRevisions extends javax.swing.JFrame {
 
         txtDate.setEditable(false);
 
+        jButton1.setText("Exportar XML");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jXML.setText("File_Name");
+        jXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXMLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,32 +261,37 @@ public class ViewRevisions extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrbI)
-                                    .addComponent(jrba))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrbr)
-                                    .addComponent(jrbRi)))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(txthour)
-                            .addComponent(txtDate)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnabsent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnpresent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnsave)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(jXML, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 408, Short.MAX_VALUE)
+                        .addComponent(btnsave))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jrbI)
+                                .addComponent(jrba))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jrbr)
+                                .addComponent(jrbRi)))
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(txthour)
+                        .addComponent(txtDate)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +304,9 @@ public class ViewRevisions extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnabsent, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnpresent)
-                            .addComponent(btnsave))
+                            .addComponent(btnsave)
+                            .addComponent(jButton1)
+                            .addComponent(jXML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,6 +372,76 @@ public class ViewRevisions extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnsaveActionPerformed
 
+    private void jXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXMLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jXMLActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jTable1.getSelectedRow() > -1) {
+            exportar(Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 2)));
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private File file;
+    
+    public void exportar(Vehicules v) {
+        file = new File(jXML.getText()+".xml");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ViewRevisions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        escribir(formatoxml(v));
+        JOptionPane.showMessageDialog(this, "Exportado a XML\n"
+                + "Encontrará el archivo en el directorio raiz del proyecto.");
+    }
+    
+    public String formatoxml(Vehicules v){
+        ArrayList<Revision> agenda = rc.revisionsList();
+        String s = "";
+        s += "<?xml version=1.0?x>\n";
+        s += "<Vehicule>\n";
+        s += "   <VehiculeDNI>"+v.getVehiculeDNI()+"</VehiculeDNI>\n";
+        s += "   <Brand>"+v.getBrand()+"</Brand>\n";
+        s += "   <Model>"+v.getModel()+"</Model>\n";
+        s += "   <Year>"+v.getYear()+"</Year>\n";
+        s += "   <InscriptionsDate>"+v.getInscriptionDate()+"</InscriptionsDate>\n";
+        s += "   <OwnerDNI>"+v.getOwnerDNI()+"</OwnerDNI>\n";
+        s += "   <OwnerName>"+v.getOwnerName()+"</OwnerName>\n";
+        s += "   <Revisions>\n";
+        
+        for (int i = 0; i < agenda.size(); i++) {
+            s += "      <Revision>\n"
+               + "         <VehculeDNI>"+agenda.get(i).getVehicule()+"</VehculeDNI>\n"
+               + "         <Date>"+agenda.get(i).getDate()+"</Date>\n"
+               + "         <Time>"+agenda.get(i).getTime()+"</Time>\n"
+               + "         <Technician>"+agenda.get(i).getTechnician()+"</Technician>\n"
+               + "         <CheckType>"+agenda.get(i).isInspection()+"</CheckType>\n"
+               + "         <Observations>"+agenda.get(i).getObservations()+"</Observations>\n"
+               + "         <State>"+agenda.get(i).isState()+"</State>\n"
+               + "      </Revision>\n";
+        }
+        s += "   </Revisions>\n";
+        s += "</Vehicule>\n";
+        return s;
+    }
+    
+    public void escribir(String s){
+        try {
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            bw.write(s);
+            bw.flush();
+        } catch (Exception e) {
+        }
+        
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -381,6 +483,7 @@ public class ViewRevisions extends javax.swing.JFrame {
     private javax.swing.JButton btnsave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -392,6 +495,7 @@ public class ViewRevisions extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextField jXML;
     private javax.swing.JRadioButton jrbI;
     private javax.swing.JRadioButton jrbRi;
     private javax.swing.JRadioButton jrba;

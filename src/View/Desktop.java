@@ -34,11 +34,15 @@ public class Desktop extends javax.swing.JFrame {
 
         ViewLogin vl = new ViewLogin(this, true);
         vl.setVisible(true);
+        
 
         if (this.currentUser != null) {
+            
             initComponents();
             this.setLocationRelativeTo(null);
-            this.setExtendedState(MAXIMIZED_BOTH);
+            jDesktopPane1.setBounds(0, 0, this.getWidth(), this.getHeight());
+            add(jDesktopPane1);
+            
         } else {
             System.exit(0);
         }
