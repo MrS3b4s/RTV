@@ -87,5 +87,15 @@ public class Revision {
         this.observations = observations;
         this.state = state;
     }
-
+    
+     public Revision(String vehiculeDNI, Date date, Time time, String technician, String inspection, String observations, String state) {
+        System.out.println(technician);
+        this.vehicule = vehiculeDNI;
+        this.date = date;
+        this.time = time;
+        this.technician = technician;
+        this.inspection = inspection;
+        this.observations = observations;
+        this.state = state;
+    }
 }
