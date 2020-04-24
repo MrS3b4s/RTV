@@ -20,11 +20,13 @@ public class ViewDetailsVehicule extends javax.swing.JFrame {
     public ViewDetailsVehicule() {
         initComponents();
         disableJTF();
+        this.setResizable(false);
     }
 
     public ViewDetailsVehicule(Vehicules vehicule) {
         this.vehicule = vehicule;
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         jTFDNIVehicule.setText(this.vehicule.getVehiculeDNI());
         jTFBrand.setText(this.vehicule.getBrand());
