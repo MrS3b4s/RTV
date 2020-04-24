@@ -39,7 +39,7 @@ public class ViewRevisions extends javax.swing.JFrame {
         tb.addColumn("Brand");
         tb.addColumn("Model");
 
-        jTable2.setModel(tb);
+        jTable2.setModel(tb); 
         
         buttonGroup1.add(jrbI);
         buttonGroup1.add(jrbRi);
