@@ -38,6 +38,7 @@ public class Desktop extends javax.swing.JFrame {
         if (this.currentUser != null) {
             initComponents();
             this.setLocationRelativeTo(null);
+            this.setExtendedState(MAXIMIZED_BOTH);
         } else {
             System.exit(0);
         }

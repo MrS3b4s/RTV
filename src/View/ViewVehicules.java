@@ -29,6 +29,7 @@ public class ViewVehicules extends javax.swing.JFrame implements Observer{
         this.setLocationRelativeTo(null);
         defaultTable();
         this.updateTablelModel();
+        this.setResizable(false);
         
     }
     Control.VehiculesControl Vh=new Control.VehiculesControl();

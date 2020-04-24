@@ -44,6 +44,7 @@ public class ViewNewUser extends javax.swing.JDialog {
     public ViewNewUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         
         panelFondo = new JPanel();

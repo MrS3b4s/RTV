@@ -27,6 +27,7 @@ public class ViewUsers extends javax.swing.JFrame implements Observer {
 
     public ViewUsers() {
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("DNI");

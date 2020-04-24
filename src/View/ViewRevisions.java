@@ -39,6 +39,7 @@ public class ViewRevisions extends javax.swing.JFrame {
 
     public ViewRevisions() {
         initComponents();
+        this.setResizable(false);
         Clock();
         updateTablelModelAppointment();
 

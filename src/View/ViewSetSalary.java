@@ -42,22 +42,18 @@ public class ViewSetSalary extends javax.swing.JFrame {
     public ViewSetSalary() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     public ViewSetSalary(User user) {
         this.user = user;
-//        this.userName = user.getUserName();
+
         initComponents();
-        // txtDNI.setText(this.user.getDni());
+ 
         System.out.println(this.user.getFullName());
         txtFullName.setText(this.user.getFullName());
-        //jDateChooser.setDate(this.user.getBirthday());
-        //txtPhone.setText(String.valueOf(this.user.getPhoneNumber()));
-        //txtEmail.setText(this.user.getEmail());
-        //txtUser.setText(this.user.getUserName());
-        //if (user.getUserType()) {
-        //    jCheckBox1.setSelected(true);
-        //}
+
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
 
