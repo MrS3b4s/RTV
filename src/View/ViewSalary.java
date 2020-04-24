@@ -6,9 +6,11 @@
 package View;
 
 import Classes.User;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +22,9 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
     /**
      * Creates new form ViewSalary
      */
+    
+    private JPanel panelFondo;
+    
     public ViewSalary() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -30,6 +35,11 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
         jTable1.setModel(tb);
         this.update(null, null);
         this.setResizable(false);
+        
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
     }
 
     public void updateTableModel() {

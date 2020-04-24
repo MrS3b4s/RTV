@@ -28,6 +28,8 @@ public class ViewAppointment extends javax.swing.JInternalFrame {
      */
     public static Appointment app;
 
+    private JPanel panelFondo;
+    
     public ViewAppointment() {
         initComponents();
     }
@@ -47,6 +49,11 @@ public class ViewAppointment extends javax.swing.JInternalFrame {
         txtmodel.setText(this.app.getVehicule().getModel());
         spinyear.setValue(this.app.getVehicule().getYear());
         btnsave.setText("Edit");
+        
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
 
     }
     private ArrayList<Observer> observadores = new ArrayList<>();

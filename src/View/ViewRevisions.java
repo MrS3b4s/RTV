@@ -46,6 +46,7 @@ public class ViewRevisions extends javax.swing.JFrame {
 
     public ViewRevisions() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         Clock();
         updateTablelModelAppointment();
@@ -341,7 +342,7 @@ public class ViewRevisions extends javax.swing.JFrame {
             updateTablelModelVehicule(
                     ap = Ap.searchAppointment((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2))
             );
-            jTextPane1.setText("El vehículo no se presentó a la revisión");
+            jTextPane1.setText("The vehicle was not presented for review");
             jrbr.setSelected(true);
 
         }
@@ -378,14 +379,16 @@ public class ViewRevisions extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jTable1.getSelectedRow() > -1) {
-            exportar(Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 2)));
+            export(Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 2)));
+        }else{
+            JOptionPane.showMessageDialog(null, "You have to select an appointment");
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private File file;
     
-    public void exportar(Vehicules v) {
+    public void export(Vehicules v) {
         file = new File(jXML.getText()+".xml");
         if (!file.exists()) {
             try {
@@ -394,12 +397,12 @@ public class ViewRevisions extends javax.swing.JFrame {
                 Logger.getLogger(ViewRevisions.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        escribir(formatoxml(v));
-        JOptionPane.showMessageDialog(this, "Exportado a XML\n"
-                + "Encontrará el archivo en el directorio raiz del proyecto.");
+        write(xmlFormat(v));
+        JOptionPane.showMessageDialog(this, "Exported to XML\n"
+                + " You will find the file in the root directory of the project.");
     }
     
-    public String formatoxml(Vehicules v){
+    public String xmlFormat(Vehicules v){
         ArrayList<Revision> agenda = rc.revisionsList();
         String s = "";
         s += "<?xml version=1.0?x>\n";
@@ -429,7 +432,7 @@ public class ViewRevisions extends javax.swing.JFrame {
         return s;
     }
     
-    public void escribir(String s){
+    public void write(String s){
         try {
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);

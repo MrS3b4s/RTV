@@ -8,6 +8,7 @@ package View;
 import Classes.Appointment;
 import Classes.User;
 import Control.ControlAppointments;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +27,8 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
 
     Control.ControlAppointments CA = new Control.ControlAppointments();
 
+    private JPanel panelFondo;
+    
     /**
      * Creates new form ViewAppointments1
      */
@@ -37,6 +41,11 @@ public class ViewAppointments1 extends javax.swing.JInternalFrame implements Obs
         tb.addColumn("Vehicule DNI");
         jTable1.setModel(tb);
         this.update(null, null);
+        
+        panelFondo = new JPanel();
+        panelFondo.setBounds(0, 0, this.getWidth(), this.getHeight());
+        panelFondo.setBackground(Color.WHITE);
+        add(panelFondo);
 
     }
 
