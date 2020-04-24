@@ -39,6 +39,7 @@ public class ViewNewVehicule extends javax.swing.JFrame {
     
     public ViewNewVehicule() {
         initComponents(); 
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         
     }

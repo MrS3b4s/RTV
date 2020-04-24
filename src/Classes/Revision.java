@@ -8,30 +8,31 @@ package Classes;
 /**
  *
  * @author Sebas
-*/
-
+ */
 import java.sql.Date;
 import java.sql.Time;
 
 public class Revision {
+
     private int id;
     private Date date;
     private Time time;
     private String technician;
-    private boolean inspection;
+    private String inspection;
     private String observations;
-    private boolean state;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private String state;
+    private String vehicule;
 
     public Date getDate() {
         return date;
+    }
+
+    public String getVehicule() {
+        return vehicule;
+    }
+
+    public void setVehicule(String vehicule) {
+        this.vehicule = vehicule;
     }
 
     public void setDate(Date date) {
@@ -54,11 +55,11 @@ public class Revision {
         this.technician = technician;
     }
 
-    public boolean isInspection() {
+    public String isInspection() {
         return inspection;
     }
 
-    public void setInspection(boolean inspection) {
+    public void setInspection(String inspection) {
         this.inspection = inspection;
     }
 
@@ -70,16 +71,26 @@ public class Revision {
         this.observations = observations;
     }
 
-    public boolean isState() {
+    public String isState() {
         return state;
     }
 
-    public void setState(boolean state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public Revision(int id, Date date, Time time, String technician, boolean inspection, String observations, boolean state) {
-        this.id = id;
+    public Revision(String vehiculeDNI, String technician, String inspection, String observations, String state) {
+        System.out.println(technician);
+        this.vehicule = vehiculeDNI;
+        this.technician = technician;
+        this.inspection = inspection;
+        this.observations = observations;
+        this.state = state;
+    }
+    
+    public Revision(String vehiculeDNI, Date date, Time time, String technician, String inspection, String observations, String state) {
+        System.out.println(technician);
+        this.vehicule = vehiculeDNI;
         this.date = date;
         this.time = time;
         this.technician = technician;
@@ -87,6 +98,5 @@ public class Revision {
         this.observations = observations;
         this.state = state;
     }
-    
-    
+
 }

@@ -9,6 +9,7 @@ import Classes.Vehicules;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,6 +29,7 @@ public class ViewVehicules extends javax.swing.JFrame implements Observer{
         this.setLocationRelativeTo(null);
         defaultTable();
         this.updateTablelModel();
+        this.setResizable(false);
         
     }
     Control.VehiculesControl Vh=new Control.VehiculesControl();
@@ -182,8 +184,11 @@ public class ViewVehicules extends javax.swing.JFrame implements Observer{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(jTable1.getSelectedRow() >=0){
-             Vehicules vehicule = Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-             Vh.deleteVehicule(vehicule);
+           
+            Vehicules vehicule = Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            if (JOptionPane.showConfirmDialog(null, "Are you sure that you want\n delete this Car?", "CONFIRMATION", 0) == 0) {
+            Vh.deleteVehicule(vehicule);
+            }
         }
         updateTablelModel();
     }//GEN-LAST:event_jButton1ActionPerformed

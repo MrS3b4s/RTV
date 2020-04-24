@@ -6,22 +6,63 @@
 package View;
 
 import Classes.Appointment;
+import Classes.User;
 import Classes.Vehicules;
 import Control.ControlAppointments;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Andrey
  */
-public class ViewAppointments extends javax.swing.JFrame {
+public class ViewAppointment extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form ViewAppointments1
+     * Creates new form ViewAppointment
      */
-    public ViewAppointments() {
+    public static Appointment app;
+
+    public ViewAppointment() {
         initComponents();
+    }
+
+    public ViewAppointment(Appointment apointment) {
+        this.app = apointment;
+
+        initComponents();
+
+        txtDatecite.setDate(this.app.getDate());
+        cmbhour.setSelectedItem(this.app.getTime());
+        txtDNI.setText(String.valueOf(this.app.getVehicule().getVehiculeDNI()));
+        txtbrand.setText(this.app.getVehicule().getBrand());
+        txtOwnerDNI.setText(String.valueOf(this.app.getVehicule().getOwnerDNI()));
+        txtInscription.setDate(this.app.getDate());
+        txtOwnerName.setText(this.app.getVehicule().getOwnerName());
+        txtmodel.setText(this.app.getVehicule().getModel());
+        spinyear.setValue(this.app.getVehicule().getYear());
+        btnsave.setText("Edit");
+
+    }
+    private ArrayList<Observer> observadores = new ArrayList<>();
+
+    public void agregarObservador(Observer o) {
+        this.observadores.add(o);
+    }
+
+    public void quitarObservador(Observer o) {
+        this.observadores.remove(o);
+    }
+
+    public void notificarObservadores() {
+        for (Observer obj : observadores) {
+            obj.update(null, null);
+        }
     }
     Control.VehiculesControl Vh = new Control.VehiculesControl();
     Control.ControlAppointments Ap = new ControlAppointments();
@@ -36,51 +77,32 @@ public class ViewAppointments extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtDatecite = new com.toedter.calendar.JDateChooser();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        cmbhour = new javax.swing.JComboBox<>();
-        txtDNI = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtbrand = new javax.swing.JTextField();
-        txtmodel = new javax.swing.JTextField();
-        txtOwnerDNI = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtOwnerName = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtInscription = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtmodel = new javax.swing.JTextField();
+        btnsave = new javax.swing.JButton();
+        txtOwnerDNI = new javax.swing.JTextField();
         spinyear = new com.toedter.calendar.JYearChooser();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtDatecite = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        cmbhour = new javax.swing.JComboBox<>();
+        txtOwnerName = new javax.swing.JTextField();
+        txtDNI = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtInscription = new com.toedter.calendar.JDateChooser();
+        txtbrand = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        jLabel1.setText("Appointments");
-
-        jLabel2.setText("Date");
-
-        jLabel3.setText("Hour");
-
-        cmbhour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "15:30", "16:00", "16:30", " " }));
-
-        txtDNI.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDNIActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText(" Vehicle Registration");
-
-        txtbrand.setEditable(false);
-        txtbrand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbrandActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -91,6 +113,13 @@ public class ViewAppointments extends javax.swing.JFrame {
             }
         });
 
+        btnsave.setText("Save");
+        btnsave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsaveActionPerformed(evt);
+            }
+        });
+
         txtOwnerDNI.setEditable(false);
         txtOwnerDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,15 +127,26 @@ public class ViewAppointments extends javax.swing.JFrame {
             }
         });
 
+        spinyear.setDoubleBuffered(false);
+
         jLabel5.setText("Brand :");
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
+        jLabel1.setText("Appointments");
 
         jLabel6.setText("Model :");
 
         jLabel7.setText("Year :");
 
+        jLabel2.setText("Date");
+
         jLabel8.setText("Inscription Date :");
 
+        jLabel3.setText("Hour");
+
         jLabel9.setText("Owner DNI :");
+
+        cmbhour.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "15:30", "16:00", "16:30", " " }));
 
         txtOwnerName.setEditable(false);
         txtOwnerName.addActionListener(new java.awt.event.ActionListener() {
@@ -115,21 +155,25 @@ public class ViewAppointments extends javax.swing.JFrame {
             }
         });
 
+        txtDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDNIActionPerformed(evt);
+            }
+        });
+
         jLabel10.setText("Owner Full Name :");
+
+        jLabel4.setText(" Vehicle Registration");
 
         txtInscription.setDateFormatString("yyyy, MMM d");
         txtInscription.setEnabled(false);
 
-        jButton1.setText("Cancel");
-
-        jButton2.setText("Save");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        txtbrand.setEditable(false);
+        txtbrand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                txtbrandActionPerformed(evt);
             }
         });
-
-        spinyear.setDoubleBuffered(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,7 +209,7 @@ public class ViewAppointments extends javax.swing.JFrame {
                                 .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton2)
+                            .addComponent(btnsave)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton1))
                         .addComponent(txtInscription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,7 +217,7 @@ public class ViewAppointments extends javax.swing.JFrame {
                         .addComponent(txtmodel, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtOwnerName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                         .addComponent(spinyear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,12 +262,56 @@ public class ViewAppointments extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnsave))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtmodelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmodelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmodelActionPerformed
+
+    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
+
+        Appointment appointment = new Appointment();
+        appointment.setVehicule(vehicule);
+
+        String[] fecha = new SimpleDateFormat("yyyy-MM-dd").format(txtDatecite.getDate()).split("-");
+        appointment.setDate(new java.sql.Date(Integer.parseInt(fecha[0]) - 1900, Integer.parseInt(fecha[1]) - 1, Integer.parseInt(fecha[2])));
+
+        String[] hora1 = String.valueOf(cmbhour.getSelectedItem()).split(":");
+        appointment.setTime(new java.sql.Time(Integer.parseInt(hora1[0]), Integer.parseInt(hora1[1]), 0));
+
+        if (Ap.verify(appointment) != 4) {
+            if (!Ap.verifyCarDNI(vehicule)) {
+                if (Ap.addAppointment(appointment, vehicule)) {
+                    JOptionPane.showMessageDialog(this, "Appointment successfully added.");
+                    this.notificarObservadores();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Appointment added without success.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "This Car have an appointment");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Sorry!\nThis schedule is full.\n Please, chage it", "Error", 0);
+
+        }
+
+     
+
+    }//GEN-LAST:event_btnsaveActionPerformed
+
+    private void txtOwnerDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOwnerDNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOwnerDNIActionPerformed
+
+    private void txtOwnerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOwnerNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOwnerNameActionPerformed
 
     private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
         if (txtDNI != null) {
@@ -251,86 +339,15 @@ public class ViewAppointments extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtbrandActionPerformed
 
-    private void txtmodelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmodelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtmodelActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtOwnerDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOwnerDNIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtOwnerDNIActionPerformed
-
-    private void txtOwnerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOwnerNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtOwnerNameActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Appointment appointment = new Appointment();
-        
-        appointment.setVehicule(vehicule);
-        
-        String[] fecha = new SimpleDateFormat("yyyy-MM-dd").format(txtDatecite.getDate()).split("-");
-        appointment.setDate(new java.sql.Date(Integer.parseInt(fecha[0]) - 1900, Integer.parseInt(fecha[1]) - 1, Integer.parseInt(fecha[2])));
-
-        String[] hora1 = String.valueOf(cmbhour.getSelectedItem()).split(":");
-        appointment.setTime(new java.sql.Time(Integer.parseInt(hora1[0]), Integer.parseInt(hora1[1]), 0));
-
-        if (Ap.verify(appointment) != 4) {
-            if (!Ap.verifyCarDNI(vehicule)) {
-                if (Ap.addAppointment(appointment, vehicule)) {
-                    JOptionPane.showMessageDialog(this, "Appointment successfully added.");
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Appointment added without success.");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "This Car have an appointment");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Sorry!\nThis schedule is full.\n Please, chage it", "Error", 0);
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewAppointments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewAppointments().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnsave;
     private javax.swing.JComboBox<String> cmbhour;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -350,4 +367,5 @@ public class ViewAppointments extends javax.swing.JFrame {
     private javax.swing.JTextField txtbrand;
     private javax.swing.JTextField txtmodel;
     // End of variables declaration//GEN-END:variables
+
 }

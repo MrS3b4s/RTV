@@ -48,12 +48,14 @@ public class ViewEditUser extends javax.swing.JFrame {
     public ViewEditUser() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
     
     public ViewEditUser(User user) {
         this.user = user;
         this.userName = user.getUserName();
         initComponents();
+        this.setResizable(false);
         txtDNI.setText(this.user.getDni());
         txtFullName.setText(this.user.getFullName());
         jDateChooser.setDate(this.user.getBirthday());

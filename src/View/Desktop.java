@@ -31,24 +31,20 @@ public class Desktop extends javax.swing.JFrame {
             frm.setVisible(true);
             db.connect(new ConfigDB().getConfig());
         }
-        
-        
+
         ViewLogin vl = new ViewLogin(this, true);
         vl.setVisible(true);
         
-        if(this.currentUser != null){
+
+        if (this.currentUser != null) {
+            
             initComponents();
             this.setLocationRelativeTo(null);
+            jDesktopPane1.setBounds(0, 0, this.getWidth(), this.getHeight());
+            add(jDesktopPane1);
+            
         } else {
             System.exit(0);
-        }
-        
-        if (this.currentUser.getUserType()) {
-            lblRevisions.setVisible(true);
-            jLabel3.setVisible(true);
-        } else {
-            lblRevisions.setVisible(false);
-            jLabel3.setVisible(false);
         }
     }
 
@@ -80,6 +76,8 @@ public class Desktop extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+
+        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblUsers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/users.png"))); // NOI18N
@@ -274,8 +272,10 @@ public class Desktop extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblUsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsersMousePressed
-        ViewUsers vw = new ViewUsers();
-        vw.setVisible(true);
+   
+            ViewUsers vw = new ViewUsers();
+            vw.setVisible(true);
+        
     }//GEN-LAST:event_lblUsersMousePressed
 
     private void lblUsersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsersMouseEntered
@@ -334,7 +334,8 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_lblappointmentMouseExited
 
     private void lblappointmentMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblappointmentMousePressed
-        ViewAppointments vw = new ViewAppointments();
+        ViewAppointments1 vw = new ViewAppointments1();
+        jDesktopPane1.add(vw);
         vw.setVisible(true);
     }//GEN-LAST:event_lblappointmentMousePressed
 
@@ -347,7 +348,7 @@ public class Desktop extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRevisionsMouseExited
 
     private void lblRevisionsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRevisionsMouseReleased
-        ViewRevisions va = new ViewRevisions();
+        ViewRevisions va  = new ViewRevisions();
         va.setVisible(true);
     }//GEN-LAST:event_lblRevisionsMouseReleased
 
@@ -387,7 +388,7 @@ public class Desktop extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;

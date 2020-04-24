@@ -26,10 +26,10 @@ public class ViewSalary extends javax.swing.JFrame implements Observer {
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("DNI");
         tb.addColumn("Name");
-
+        
         jTable1.setModel(tb);
         this.update(null, null);
-
+        this.setResizable(false);
     }
 
     public void updateTableModel() {
