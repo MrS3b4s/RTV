@@ -305,7 +305,7 @@ public class ViewAppointment extends javax.swing.JInternalFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Sorry!\nThis schedule is full.\n Please, chage it", "Error", 0);
-
+            this.notificarObservadores();
         }
 
      
@@ -375,4 +375,5 @@ public class ViewAppointment extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtmodel;
     // End of variables declaration//GEN-END:variables
 
+   
 }

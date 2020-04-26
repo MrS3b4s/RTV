@@ -16,6 +16,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +24,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -31,7 +34,7 @@ import javax.swing.JOptionPane;
  *
  * @author Sebas
  */
-public class ViewRevisions extends javax.swing.JFrame {
+public class ViewRevisions extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form ViewRevisions
@@ -43,6 +46,8 @@ public class ViewRevisions extends javax.swing.JFrame {
     Control.ControlAppointments Ap = new ControlAppointments();
     Control.RevisionsControl rc = new Control.RevisionsControl();
     private Appointment ap;
+    private java.sql.Date actualDate = new Date(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH);;
+    
 
     public ViewRevisions() {
         initComponents();
@@ -50,7 +55,7 @@ public class ViewRevisions extends javax.swing.JFrame {
         this.setResizable(false);
         Clock();
         updateTablelModelAppointment();
-
+        
         DefaultTableModel tb = new DefaultTableModel();
         tb.addColumn("Vehicule DNI");
         tb.addColumn("Brand");
@@ -96,10 +101,10 @@ public class ViewRevisions extends javax.swing.JFrame {
                 while (true) {
                     try {
                         Thread.sleep(500);
-                        String año = String.valueOf(fecha.get(Calendar.YEAR));
-                        String mes = String.valueOf(fecha.get(Calendar.MONTH));
-                        String dia = String.valueOf(fecha.get(Calendar.DAY_OF_MONTH));
-                        txtDate.setText(dia + "/" + mes + "/" + año);
+                        String year = String.valueOf(fecha.get(Calendar.YEAR));
+                        String month = String.valueOf(fecha.get(Calendar.MONTH));
+                        String day = String.valueOf(fecha.get(Calendar.DAY_OF_MONTH));
+                        txtDate.setText(day + "/" + month + "/" + year);
                         txthour.setText(formateador.format(LocalDateTime.now()));
 
                     } catch (InterruptedException e) {
@@ -118,8 +123,10 @@ public class ViewRevisions extends javax.swing.JFrame {
         tb.addColumn("Date");
         tb.addColumn("Hour");
         tb.addColumn("Vehicule DNI");
-        ArrayList<Appointment> as = Ap.appoinmentList();
-
+        Calendar fecha = new GregorianCalendar();
+        Date date = new Date(fecha.get(Calendar.YEAR)-1900, fecha.get(Calendar.MONTH), fecha.get(Calendar.DAY_OF_MONTH));
+        ArrayList<Appointment> as = Ap.appoinmentFilter(date);
+        System.out.println(date.toString());
         for (Appointment a : as) {
             Object[] o = new Object[3];
             o[0] = a.getDate();
@@ -162,8 +169,7 @@ public class ViewRevisions extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txthour = new javax.swing.JTextField();
         txtDate = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jXML = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         jCheckBox1.setText("jCheckBox1");
 
@@ -241,17 +247,10 @@ public class ViewRevisions extends javax.swing.JFrame {
 
         txtDate.setEditable(false);
 
-        jButton1.setText("Exportar XML");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("History Revisions");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jXML.setText("File_Name");
-        jXML.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXMLActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -268,31 +267,26 @@ public class ViewRevisions extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnpresent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jXML, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 408, Short.MAX_VALUE)
-                        .addComponent(btnsave))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3)
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jrbI)
-                                .addComponent(jrba))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jrbr)
-                                .addComponent(jrbRi)))
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel4)
-                        .addComponent(txthour)
-                        .addComponent(txtDate)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnsave, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jrbI)
+                            .addComponent(jrba))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jrbr)
+                            .addComponent(jrbRi)))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(txthour)
+                    .addComponent(txtDate))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,8 +300,7 @@ public class ViewRevisions extends javax.swing.JFrame {
                             .addComponent(btnabsent, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnpresent)
                             .addComponent(btnsave)
-                            .addComponent(jButton1)
-                            .addComponent(jXML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,6 +359,7 @@ public class ViewRevisions extends javax.swing.JFrame {
         if(rc.addRevision(user)){
             JOptionPane.showMessageDialog(null, "Ready");
             Ap.deleteapp(ap);
+            this.update(null, null);
         }
             //JOptionPane.showMessageDialog(null, "Ready");
            // Ap.deleteapp(ap);
@@ -373,112 +367,12 @@ public class ViewRevisions extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnsaveActionPerformed
 
-    private void jXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXMLActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jXMLActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTable1.getSelectedRow() > -1) {
-            export(Vh.searchVehicule((String)jTable1.getValueAt(jTable1.getSelectedRow(), 2)));
-        }else{
-            JOptionPane.showMessageDialog(null, "You have to select an appointment");
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ViewHystoryRevisions hr = new ViewHystoryRevisions();
+        hr.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
     
-    private File file;
-    
-    public void export(Vehicules v) {
-        file = new File(jXML.getText()+".xml");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException ex) {
-                Logger.getLogger(ViewRevisions.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        write(xmlFormat(v));
-        JOptionPane.showMessageDialog(this, "Exported to XML\n"
-                + " You will find the file in the root directory of the project.");
-    }
-    
-    public String xmlFormat(Vehicules v){
-        ArrayList<Revision> agenda = rc.revisionsList();
-        String s = "";
-        s += "<?xml version=1.0?x>\n";
-        s += "<Vehicule>\n";
-        s += "   <VehiculeDNI>"+v.getVehiculeDNI()+"</VehiculeDNI>\n";
-        s += "   <Brand>"+v.getBrand()+"</Brand>\n";
-        s += "   <Model>"+v.getModel()+"</Model>\n";
-        s += "   <Year>"+v.getYear()+"</Year>\n";
-        s += "   <InscriptionsDate>"+v.getInscriptionDate()+"</InscriptionsDate>\n";
-        s += "   <OwnerDNI>"+v.getOwnerDNI()+"</OwnerDNI>\n";
-        s += "   <OwnerName>"+v.getOwnerName()+"</OwnerName>\n";
-        s += "   <Revisions>\n";
-        
-        for (int i = 0; i < agenda.size(); i++) {
-            s += "      <Revision>\n"
-               + "         <VehculeDNI>"+agenda.get(i).getVehicule()+"</VehculeDNI>\n"
-               + "         <Date>"+agenda.get(i).getDate()+"</Date>\n"
-               + "         <Time>"+agenda.get(i).getTime()+"</Time>\n"
-               + "         <Technician>"+agenda.get(i).getTechnician()+"</Technician>\n"
-               + "         <CheckType>"+agenda.get(i).isInspection()+"</CheckType>\n"
-               + "         <Observations>"+agenda.get(i).getObservations()+"</Observations>\n"
-               + "         <State>"+agenda.get(i).isState()+"</State>\n"
-               + "      </Revision>\n";
-        }
-        s += "   </Revisions>\n";
-        s += "</Vehicule>\n";
-        return s;
-    }
-    
-    public void write(String s){
-        try {
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            
-            bw.write(s);
-            bw.flush();
-        } catch (Exception e) {
-        }
-        
-        
-    }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewRevisions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewRevisions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewRevisions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewRevisions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewRevisions().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnabsent;
@@ -486,7 +380,7 @@ public class ViewRevisions extends javax.swing.JFrame {
     private javax.swing.JButton btnsave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -498,7 +392,6 @@ public class ViewRevisions extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextField jXML;
     private javax.swing.JRadioButton jrbI;
     private javax.swing.JRadioButton jrbRi;
     private javax.swing.JRadioButton jrba;
@@ -524,5 +417,10 @@ public String Type() {
             return jrbI.getText();
         }
         return jrbr.getText();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.updateTablelModelAppointment();
     }
 }

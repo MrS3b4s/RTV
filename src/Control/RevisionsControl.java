@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Date;
 
 /**
  *
@@ -54,4 +55,45 @@ public class RevisionsControl {
         return a;
     }
     
+    public Revision searchRevision(String dniVehicule){
+        ResultSet resultSet = Desktop.db.search("SELECT * FROM `checking` where DNIvehicule='"+dniVehicule+"'");
+        if(resultSet!= null){
+            try{
+                resultSet.next();
+                return new Revision(
+                            resultSet.getString(2),
+                            resultSet.getDate(3),
+                            resultSet.getTime(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8));
+            }catch(SQLException ex){
+                System.out.println(ex);
+            }
+        }
+        return null;
+    }
+    
+    public ArrayList revisionFilter(Date date){
+        ArrayList<Revision> revisions = new ArrayList<>();
+        ResultSet resultSet = Desktop.db.list("select * from checking where Date='"+date+"'");
+        if(resultSet != null){
+            try{
+                while(resultSet.next()){
+                    revisions.add(new Revision(
+                            resultSet.getString(2),
+                            resultSet.getDate(3),
+                            resultSet.getTime(4),
+                            resultSet.getString(5),
+                            resultSet.getString(6),
+                            resultSet.getString(7),
+                            resultSet.getString(8)));
+                }
+            }catch (SQLException ex){
+                System.out.println(ex);
+            }
+        }
+        return revisions;
+    }
 }

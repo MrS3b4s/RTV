@@ -1,0 +1,147 @@
+<?xml version=1.0?x>
+<Vehicule>
+   <VehiculeDNI>123456</VehiculeDNI>
+   <Brand>lexus</Brand>
+   <Model>mr-500</Model>
+   <Year>2020</Year>
+   <InscriptionsDate>2020-04-08</InscriptionsDate>
+   <OwnerDNI>503630153</OwnerDNI>
+   <OwnerName>Juana</OwnerName>
+   <Revisions>
+      <Revision>
+         <VehculeDNI>88</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:23:47</Time>
+         <Technician>ERICK</Technician>
+         <CheckType>INS</CheckType>
+         <Observations>HOLA</Observations>
+         <State>99</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>88</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:26:05</Time>
+         <Technician>ERICK</Technician>
+         <CheckType>INS</CheckType>
+         <Observations>HOLA</Observations>
+         <State>99</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>88</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:27:36</Time>
+         <Technician>ERICK</Technician>
+         <CheckType>INS</CheckType>
+         <Observations>HOLA</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>88</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:28:52</Time>
+         <Technician>ERICK</Technician>
+         <CheckType>INS</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>88</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:30:09</Time>
+         <Technician>ERICK</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>88</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:31:57</Time>
+         <Technician>207910363</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>123456</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:33:13</Time>
+         <Technician>207910363</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>123456</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:34:42</Time>
+         <Technician>207910363</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>123456</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:35:40</Time>
+         <Technician>207910363</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>459659</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:38:47</Time>
+         <Technician>207910363</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>123456</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>15:39:10</Time>
+         <Technician>207910363</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>123456</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>17:29:25</Time>
+         <Technician>103330444</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>El vehículo no se presentó a la revisión</Observations>
+         <State>Reprobate</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>123456</VehculeDNI>
+         <Date>2020-04-23</Date>
+         <Time>17:31:13</Time>
+         <Technician>103330444</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>Todo funciona bien</Observations>
+         <State>Inspection</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>606735</VehculeDNI>
+         <Date>2020-04-25</Date>
+         <Time>15:30:04</Time>
+         <Technician>504230893</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations>todo bien</Observations>
+         <State>Inspection</State>
+      </Revision>
+      <Revision>
+         <VehculeDNI>606735</VehculeDNI>
+         <Date>2020-04-25</Date>
+         <Time>15:40:58</Time>
+         <Technician>504230893</Technician>
+         <CheckType>Inspection</CheckType>
+         <Observations></Observations>
+         <State>Inspection</State>
+      </Revision>
+   </Revisions>
+</Vehicule>
